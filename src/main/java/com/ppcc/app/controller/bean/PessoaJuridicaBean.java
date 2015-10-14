@@ -26,29 +26,29 @@ import bo.TipoBemBO;
 import bo.TipoEmpresarialBO;
 import bo.UsuarioBO;
 import bo.UtilBO;
-import entidade.Bem;
-import entidade.BemHistorico;
-import entidade.Cidade;
-import entidade.Endereco;
-import entidade.EnderecoHistorico;
-import entidade.EnderecoPessoa;
-import entidade.EnderecoPessoaFisicaJuridicaHistorico;
-import entidade.Estado;
-import entidade.Funcao;
-import entidade.Instituicao;
-import entidade.PessoaFisica;
-import entidade.PessoaFisicaJuridica;
-import entidade.PessoaFisicaJuridicaHistorico;
-import entidade.PessoaJuridica;
-import entidade.PessoaJuridicaHistorico;
-import entidade.PessoaJuridicaJuridica;
-import entidade.PessoaJuridicaJuridicaHistorico;
-import entidade.PessoaJuridicaSucessao;
-import entidade.PessoaJuridicaSucessaoHistorico;
-import entidade.ProcessoJudicial;
-import entidade.TipoBem;
-import entidade.TipoEmpresarial;
-import entidade.Usuario;
+import com.ppcc.app.model.entity.Bem;
+import com.ppcc.app.model.entity.BemHistorico;
+import com.ppcc.app.model.entity.Cidade;
+import com.ppcc.app.model.entity.Endereco;
+import com.ppcc.app.model.entity.EnderecoHistorico;
+import com.ppcc.app.model.entity.EnderecoPessoa;
+import com.ppcc.app.model.entity.EnderecoPessoaFisicaJuridicaHistorico;
+import com.ppcc.app.model.entity.Estado;
+import com.ppcc.app.model.entity.Funcao;
+import com.ppcc.app.model.entity.Instituicao;
+import com.ppcc.app.model.entity.PessoaFisica;
+import com.ppcc.app.model.entity.PessoaFisicaJuridica;
+import com.ppcc.app.model.entity.PessoaFisicaJuridicaHistorico;
+import com.ppcc.app.model.entity.PessoaJuridica;
+import com.ppcc.app.model.entity.PessoaJuridicaHistorico;
+import com.ppcc.app.model.entity.PessoaJuridicaJuridica;
+import com.ppcc.app.model.entity.PessoaJuridicaJuridicaHistorico;
+import com.ppcc.app.model.entity.PessoaJuridicaSucessao;
+import com.ppcc.app.model.entity.PessoaJuridicaSucessaoHistorico;
+import com.ppcc.app.model.entity.ProcessoJudicial;
+import com.ppcc.app.model.entity.TipoBem;
+import com.ppcc.app.model.entity.TipoEmpresarial;
+import com.ppcc.app.model.entity.Usuario;
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
@@ -60,9 +60,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-import util.Cookie;
-import util.GeradorLog;
-import util.MetodosConvencionais;
+import com.ppcc.app.util.Cookie;
+import com.ppcc.app.util.GeradorLog;
+import com.ppcc.app.util.MetodosConvencionais;
 
 /**
  *
@@ -479,7 +479,7 @@ public class PessoaJuridicaBean implements Serializable {
 
     public void prepararHistorico(PessoaJuridica pessoaJuridica, Endereco endereco, List<PessoaFisicaJuridica> pessoaFisicaJuridicaList, List<PessoaJuridicaJuridica> pessoaJuridicaJuridicaList, List<Bem> bemList) {
         /*
-         Montar entidades dos históricos de alteração 
+         Montar com.ppcc.app.model.entitys dos históricos de alteração 
          */
         Usuario usuario = UsuarioBO.findUsuarioByCPF(Cookie.getCookie("usuario"));
         pessoaJuridicaHistorico = new PessoaJuridicaHistorico();
@@ -548,7 +548,7 @@ public class PessoaJuridicaBean implements Serializable {
 
     private EnderecoPessoaFisicaJuridicaHistorico prepararRegistroAtual(PessoaJuridica pessoaJuridica, Endereco endereco, List<PessoaFisicaJuridica> pessoaFisicaJuridicaList, List<PessoaJuridicaJuridica> pessoaJuridicaJuridicaList, List<Bem> bemList) {
         /*
-         Montar registro atual como uma entidade de histórico para facilitar o ui:repeat do form
+         Montar registro atual como uma com.ppcc.app.model.entity de histórico para facilitar o ui:repeat do form
          */
         EnderecoPessoaFisicaJuridicaHistorico enderecoPessoaFisicaJuridicaHistorico = new EnderecoPessoaFisicaJuridicaHistorico();
         PessoaJuridicaHistorico pessoaJuridicaHistorico = new PessoaJuridicaHistorico();
