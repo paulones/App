@@ -6,10 +6,10 @@
 
 package com.ppcc.app.util;
 
-import bo.LogBO;
-import bo.UsuarioBO;
-import bo.UtilBO;
-import entidade.Log;
+import com.ppcc.app.model.entity.Log;
+import com.ppcc.app.model.jpa.controller.AutorizacaoJpaController;
+import com.ppcc.app.model.jpa.controller.LogJpaController;
+import com.ppcc.app.model.jpa.controller.UtilJpaController;
 
 /**
  *
@@ -18,13 +18,13 @@ import entidade.Log;
 public class GeradorLog {
     
     
-    public static void criar(Integer idFk, String tabela, char operacao){
+    public static void criar(Integer idFk, String tabela, char operacao) throws Exception{
         Log log = new Log();
-        log.setDataDeCriacao(UtilBO.findServerTime());
+        log.setDataDeCriacao(new UtilJpaController().findServerTime());
         log.setIdFk(idFk);
         log.setOperacao(operacao);
         log.setTabela(tabela);
-        log.setInstituicaoFk(UsuarioBO.findAutorizacaoByCPF(Cookie.getCookie("usuario")).getInstituicaoFk());
-        LogBO.create(log);
+        log.setInstituicaoFk(new AutorizacaoJpaController().findAutorizacaoByCPF(Cookie.getCookie("usuario")).getInstituicaoFk());
+        new LogJpaController().create(log);
     }
 }

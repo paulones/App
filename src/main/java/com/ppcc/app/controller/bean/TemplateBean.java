@@ -5,53 +5,55 @@
  */
 package com.ppcc.app.controller.bean;
 
-import bo.AquisicaoBemBO;
-import bo.BemBO;
-import bo.CidadeBO;
-import bo.CitacaoBO;
-import bo.EnderecoBO;
-import bo.EstadoBO;
-import bo.EstadoCivilBO;
-import bo.FuncaoBO;
-import bo.NacionalidadeBO;
-import bo.PaisBO;
-import bo.PenhoraBO;
-import bo.PessoaFisicaBO;
-import bo.PessoaFisicaFisicaBO;
-import bo.PessoaFisicaJuridicaBO;
-import bo.PessoaJuridicaBO;
-import bo.PessoaJuridicaJuridicaBO;
-import bo.PessoaJuridicaSucessaoBO;
-import bo.ProcessoJudicialBO;
-import bo.RedirecionamentoBO;
-import bo.TipoBemBO;
-import bo.TipoEmpresarialBO;
-import bo.UsuarioBO;
-import bo.VinculoSocialBO;
-import entidade.Bem;
-import entidade.Cidade;
-import entidade.Citacao;
-import entidade.Endereco;
-import entidade.EnderecoPessoa;
-import entidade.Estado;
-import entidade.EstadoCivil;
-import entidade.Executado;
-import entidade.Funcao;
-import entidade.Nacionalidade;
-import entidade.Pais;
-import entidade.PessoaFisica;
-import entidade.PessoaFisicaFisica;
-import entidade.PessoaFisicaJuridica;
-import entidade.PessoaJuridica;
-import entidade.PessoaJuridicaJuridica;
-import entidade.PessoaJuridicaSucessao;
-import entidade.ProcessoJudicial;
-import entidade.Redirecionamento;
-import entidade.SocioRedirecionamento;
-import entidade.TipoBem;
-import entidade.TipoEmpresarial;
-import entidade.Usuario;
-import entidade.VinculoSocial;
+import com.ppcc.app.model.entity.Autorizacao;
+import com.ppcc.app.model.entity.Bem;
+import com.ppcc.app.model.entity.Cidade;
+import com.ppcc.app.model.entity.Citacao;
+import com.ppcc.app.model.entity.Endereco;
+import com.ppcc.app.model.entity.EnderecoPessoa;
+import com.ppcc.app.model.entity.Estado;
+import com.ppcc.app.model.entity.EstadoCivil;
+import com.ppcc.app.model.entity.Executado;
+import com.ppcc.app.model.entity.Funcao;
+import com.ppcc.app.model.entity.Nacionalidade;
+import com.ppcc.app.model.entity.Pais;
+import com.ppcc.app.model.entity.PessoaFisica;
+import com.ppcc.app.model.entity.PessoaFisicaFisica;
+import com.ppcc.app.model.entity.PessoaFisicaJuridica;
+import com.ppcc.app.model.entity.PessoaJuridica;
+import com.ppcc.app.model.entity.PessoaJuridicaJuridica;
+import com.ppcc.app.model.entity.PessoaJuridicaSucessao;
+import com.ppcc.app.model.entity.ProcessoJudicial;
+import com.ppcc.app.model.entity.Redirecionamento;
+import com.ppcc.app.model.entity.SocioRedirecionamento;
+import com.ppcc.app.model.entity.TipoBem;
+import com.ppcc.app.model.entity.TipoEmpresarial;
+import com.ppcc.app.model.entity.Usuario;
+import com.ppcc.app.model.entity.VinculoSocial;
+import com.ppcc.app.model.jpa.controller.AquisicaoBemJpaController;
+import com.ppcc.app.model.jpa.controller.AutorizacaoJpaController;
+import com.ppcc.app.model.jpa.controller.BemJpaController;
+import com.ppcc.app.model.jpa.controller.CidadeJpaController;
+import com.ppcc.app.model.jpa.controller.CitacaoJpaController;
+import com.ppcc.app.model.jpa.controller.EnderecoJpaController;
+import com.ppcc.app.model.jpa.controller.EstadoCivilJpaController;
+import com.ppcc.app.model.jpa.controller.EstadoJpaController;
+import com.ppcc.app.model.jpa.controller.FuncaoJpaController;
+import com.ppcc.app.model.jpa.controller.NacionalidadeJpaController;
+import com.ppcc.app.model.jpa.controller.PaisJpaController;
+import com.ppcc.app.model.jpa.controller.PenhoraJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaFisicaFisicaJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaFisicaJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaFisicaJuridicaJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaJuridicaJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaJuridicaJuridicaJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaJuridicaSucessaoJpaController;
+import com.ppcc.app.model.jpa.controller.ProcessoJudicialJpaController;
+import com.ppcc.app.model.jpa.controller.RedirecionamentoJpaController;
+import com.ppcc.app.model.jpa.controller.TipoBemJpaController;
+import com.ppcc.app.model.jpa.controller.TipoEmpresarialJpaController;
+import com.ppcc.app.model.jpa.controller.UsuarioJpaController;
+import com.ppcc.app.model.jpa.controller.VinculoSocialJpaController;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -61,8 +63,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import util.Cookie;
-import util.GeradorLog;
+import com.ppcc.app.util.Cookie;
+import com.ppcc.app.util.GeradorLog;
 
 /**
  *
@@ -94,7 +96,28 @@ public class TemplateBean implements Serializable {
     private List<PessoaJuridicaJuridica> pessoaJuridicaJuridicaList;
     private List<Bem> bemList;
     private List<TipoBem> tipoBemList; 
-
+    
+    private AquisicaoBemJpaController aquisicaoBemJpaController = new AquisicaoBemJpaController();
+    private BemJpaController bemJpaController = new BemJpaController();
+    private CidadeJpaController cidadeJpaController = new CidadeJpaController();
+    private CitacaoJpaController citacaoJpaController = new CitacaoJpaController();
+    private EnderecoJpaController enderecoJpaController = new EnderecoJpaController();
+    private EstadoJpaController estadoJpaController = new EstadoJpaController();
+    private FuncaoJpaController funcaoJpaController = new FuncaoJpaController();
+    private PaisJpaController paisJpaController = new PaisJpaController();
+    private PenhoraJpaController penhoraJpaController = new PenhoraJpaController();
+    private PessoaFisicaJpaController pessoaFisicaJpaController = new PessoaFisicaJpaController();
+    private PessoaFisicaFisicaJpaController pessoaFisicaFisicaJpaController = new PessoaFisicaFisicaJpaController();
+    private PessoaFisicaJuridicaJpaController pessoaFisicaJuridicaJpaController = new PessoaFisicaJuridicaJpaController();
+    private PessoaJuridicaJpaController pessoaJuridicaJpaController = new PessoaJuridicaJpaController();
+    private PessoaJuridicaJuridicaJpaController pessoaJuridicaJuridicaJpaController = new PessoaJuridicaJuridicaJpaController();
+    private PessoaJuridicaSucessaoJpaController pessoaJuridicaSucessaoJpaController = new PessoaJuridicaSucessaoJpaController();
+    private RedirecionamentoJpaController redirecionamentoJpaController = new RedirecionamentoJpaController();
+    private TipoBemJpaController tipoBemJpaController = new TipoBemJpaController();
+    private UsuarioJpaController usuarioJpaController = new UsuarioJpaController();
+    private AutorizacaoJpaController autorizacaoJpaController = new AutorizacaoJpaController();
+    
+    
     private String pfVId;
     private String pjVId;
     private String register;
@@ -106,7 +129,7 @@ public class TemplateBean implements Serializable {
 
     public void init() {
         if (!FacesContext.getCurrentInstance().isPostback()) {
-            usuario = UsuarioBO.findUsuarioByCPF(Cookie.getCookie("usuario")); 
+            usuario = usuarioJpaController.findUsuarioByCPF(Cookie.getCookie("usuario")); 
  
             enderecoPessoaFisica = new EnderecoPessoa(new PessoaFisica(), new Endereco(), new ArrayList<Bem>());
             enderecoPessoaJuridica = new EnderecoPessoa(new PessoaJuridica(), new Endereco(), new ArrayList<Bem>());
@@ -144,49 +167,49 @@ public class TemplateBean implements Serializable {
             bem.setTipo(idfk.substring(0, 2));
             bem.setIdFk(Integer.valueOf(idfk.substring(2)));
             bem.setStatus('A');
-            tipoBemList = TipoBemBO.findAll();
+            tipoBemList = tipoBemJpaController.findTipoBemEntities();
         }
     }
 
     public void carregarFormularioModalPF() {
-        paisList = PaisBO.findAll();
-        paisList.remove(PaisBO.findBrasil());
-        estadoList = EstadoBO.findAll();
-        nacionalidadeList = NacionalidadeBO.findAll();
-        estadoCivilList = EstadoCivilBO.findAll();
-        funcaoList = FuncaoBO.findAll();
-        vinculoSocialList = VinculoSocialBO.findAll();
-        tipoBemList = TipoBemBO.findAll();
+        paisList = paisJpaController.findPaisEntities();
+        paisList.remove(paisJpaController.findBrasil());
+        estadoList = estadoJpaController.findEstadoEntities();
+        nacionalidadeList = new NacionalidadeJpaController().findNacionalidadeEntities();
+        estadoCivilList = new EstadoCivilJpaController().findEstadoCivilEntities();
+        funcaoList = funcaoJpaController.findFuncaoEntities();
+        vinculoSocialList = new VinculoSocialJpaController().findVinculoSocialEntities();
+        tipoBemList = tipoBemJpaController.findTipoBemEntities();
     }
 
     public void carregarFormularioModalPJ() {
-        estadoList = EstadoBO.findAll();
-        tipoEmpresarialList = TipoEmpresarialBO.findAll();
-        funcaoList = FuncaoBO.findAll();
-        tipoBemList = TipoBemBO.findAll();
+        estadoList = estadoJpaController.findEstadoEntities();
+        tipoEmpresarialList = new TipoEmpresarialJpaController().findTipoEmpresarialEntities();
+        funcaoList = funcaoJpaController.findFuncaoEntities();
+        tipoBemList = tipoBemJpaController.findTipoBemEntities();
     }
 
     public void getCidadesPeloEstado() {
         if (tabela.equals("PF")) {
             PessoaFisica pessoaFisica = (PessoaFisica) enderecoPessoaFisica.getPessoa();
             if (pessoaFisica.getEstadoFk() != null) {
-                cidadeNatList = CidadeBO.getByStateId(pessoaFisica.getEstadoFk().getId());
+                cidadeNatList = cidadeJpaController.getByStateId(pessoaFisica.getEstadoFk().getId());
             } else {
                 cidadeNatList.clear();
             }
             if (enderecoPessoaFisica.getEndereco().getEstadoFk() != null) {
-                cidadeEndList = CidadeBO.getByStateId(enderecoPessoaFisica.getEndereco().getEstadoFk().getId());
+                cidadeEndList = cidadeJpaController.getByStateId(enderecoPessoaFisica.getEndereco().getEstadoFk().getId());
             } else {
                 cidadeEndList.clear();
             }
             if (pessoaFisica.getEstadoEleitoralFk() != null) {
-                cidadeEleList = CidadeBO.getByStateId(pessoaFisica.getEstadoEleitoralFk().getId());
+                cidadeEleList = cidadeJpaController.getByStateId(pessoaFisica.getEstadoEleitoralFk().getId());
             } else {
                 cidadeEleList.clear();
             }
         } else if (tabela.equals("PJ")) {
             if (enderecoPessoaJuridica.getEndereco().getEstadoFk() != null) {
-                cidadeEndList = CidadeBO.getByStateId(enderecoPessoaJuridica.getEndereco().getEstadoFk().getId());
+                cidadeEndList = cidadeJpaController.getByStateId(enderecoPessoaJuridica.getEndereco().getEstadoFk().getId());
             } else {
                 cidadeEndList.clear();
             }
@@ -216,7 +239,7 @@ public class TemplateBean implements Serializable {
     }
 
     public void vincularPessoaFisica() {
-        PessoaFisica pessoaFisica = PessoaFisicaBO.findPessoaFisica(Integer.valueOf(pfVId));
+        PessoaFisica pessoaFisica = pessoaFisicaJpaController.findPessoaFisica(Integer.valueOf(pfVId));
         if (tabela.equals("PF")) {
             PessoaFisicaFisica pessoaFisicaFisica = new PessoaFisicaFisica();
             pessoaFisicaFisica.setPessoaFisicaSecundariaFk(pessoaFisica);
@@ -254,7 +277,7 @@ public class TemplateBean implements Serializable {
     }
 
     public void vincularPessoaJuridica() {
-        PessoaJuridica pessoaJuridica = PessoaJuridicaBO.findPessoaJuridica(Integer.valueOf(pjVId));
+        PessoaJuridica pessoaJuridica = pessoaJuridicaJpaController.findPessoaJuridica(Integer.valueOf(pjVId));
         if (tabela.equals("PF")) {
             PessoaFisicaJuridica pessoaFisicaJuridica = new PessoaFisicaJuridica();
             pessoaFisicaJuridica.setPessoaJuridicaFk(pessoaJuridica);
@@ -286,13 +309,13 @@ public class TemplateBean implements Serializable {
         pessoaJuridicaJuridicaList.remove(index);
     }
 
-    public void cadastrarBem() {
+    public void cadastrarBem() throws Exception {
         bemRepetido = false;
         List<Bem> bemList = new ArrayList<>();
         if (bem.getTipo().equals("PF")) {
-            bemList = BemBO.findPFBens(bem.getIdFk());
+            bemList = bemJpaController.findPFBens(bem.getIdFk());
         } else if (bem.getTipo().equals("PJ")) {
-            bemList = BemBO.findPJBens(bem.getIdFk());
+            bemList = bemJpaController.findPJBens(bem.getIdFk());
         }
         for (Bem bem : bemList) {
             if (this.bem.equalsValues(bem)) {
@@ -304,94 +327,92 @@ public class TemplateBean implements Serializable {
             if (bem.getDataDeAquisicao() != null || bem.getDataDeTransferenciaOuExtincao() != null
                     || bem.getDescricao() != null || bem.getEndereco() != null || bem.getValor() != null
                     || bem.getTipoBemFk() != null) {
-                BemBO.create(bem);
+                bemJpaController.create(bem);
             }
         }
     }
 
-    public void cadastrarPF() {
+    public void cadastrarPF() throws Exception {
         PessoaFisica pessoaFisica = (PessoaFisica) enderecoPessoaFisica.getPessoa();
         if (pessoaFisica.getRgOrgaoEmissor() != null) {
             pessoaFisica.setRgOrgaoEmissor(pessoaFisica.getRgOrgaoEmissor().toUpperCase());
         }
         if (pessoaFisica.getEstadoFk() != null) {
-            pessoaFisica.setPaisFk(PaisBO.findBrasil());
+            pessoaFisica.setPaisFk(paisJpaController.findBrasil());
         }
         pessoaFisica.setStatus('A');
-        pessoaFisica.setUsuarioFk(UsuarioBO.findUsuarioByCPF(Cookie.getCookie("usuario")));
-        pessoaFisica.setInstituicaoFk(UsuarioBO.findAutorizacaoByCPF(Cookie.getCookie("usuario")).getInstituicaoFk());
-        PessoaFisicaBO.create(pessoaFisica);
+        pessoaFisica.setUsuarioFk(usuarioJpaController.findUsuarioByCPF(Cookie.getCookie("usuario")));
+        pessoaFisica.setInstituicaoFk(autorizacaoJpaController.findAutorizacaoByCPF(Cookie.getCookie("usuario")).getInstituicaoFk());
+        pessoaFisicaJpaController.create(pessoaFisica);
         Endereco endereco = enderecoPessoaFisica.getEndereco();
         endereco.setTipo("PF");
         endereco.setIdFk(pessoaFisica.getId());
-        EnderecoBO.create(endereco);
+        enderecoJpaController.create(endereco);
         for (PessoaFisicaJuridica pfj : pessoaFisicaJuridicaList) {
             pfj.setPessoaFisicaFk(pessoaFisica);
-            PessoaFisicaJuridicaBO.create(pfj);
+            pessoaFisicaJuridicaJpaController.create(pfj);
         }
         for (PessoaFisicaFisica pff : pessoaFisicaFisicaList) {
             pff.setPessoaFisicaPrimariaFk(pessoaFisica);
-            PessoaFisicaFisicaBO.create(pff);
+            pessoaFisicaFisicaJpaController.create(pff);
         }
         for (Bem b : bemList) {
             b.setTipo("PF");
             b.setIdFk(pessoaFisica.getId());
-            BemBO.create(b);
+            bemJpaController.create(b);
         }
         GeradorLog.criar(pessoaFisica.getId(), "PF", 'C');
     }
 
-    public void cadastrarPJ() {
+    public void cadastrarPJ() throws Exception {
         PessoaJuridica pessoaJuridica = (PessoaJuridica) enderecoPessoaJuridica.getPessoa();
         pessoaJuridica.setStatus('A');
-        pessoaJuridica.setUsuarioFk(UsuarioBO.findUsuarioByCPF(Cookie.getCookie("usuario")));
-        pessoaJuridica.setInstituicaoFk(UsuarioBO.findAutorizacaoByCPF(Cookie.getCookie("usuario")).getInstituicaoFk());
-        PessoaJuridicaBO.create(pessoaJuridica);
+        pessoaJuridica.setUsuarioFk(usuarioJpaController.findUsuarioByCPF(Cookie.getCookie("usuario")));
+        pessoaJuridica.setInstituicaoFk(autorizacaoJpaController.findAutorizacaoByCPF(Cookie.getCookie("usuario")).getInstituicaoFk());
+        pessoaJuridicaJpaController.create(pessoaJuridica);
         Endereco endereco = enderecoPessoaJuridica.getEndereco();
         endereco.setTipo("PJ");
         endereco.setIdFk(pessoaJuridica.getId());
-        EnderecoBO.create(endereco);
+        enderecoJpaController.create(endereco);
         for (PessoaFisicaJuridica pfj : pessoaFisicaJuridicaList) {
             pfj.setPessoaJuridicaFk(pessoaJuridica);
-            PessoaFisicaJuridicaBO.create(pfj);
+            pessoaFisicaJuridicaJpaController.create(pfj);
         }
         for (PessoaJuridicaJuridica pjj : pessoaJuridicaJuridicaList) {
             pjj.setPessoaJuridicaPrimariaFk(pessoaJuridica);
-            PessoaJuridicaJuridicaBO.create(pjj);
+            pessoaJuridicaJuridicaJpaController.create(pjj);
         }
         for (Bem b : bemList) {
             b.setTipo("PJ");
             b.setIdFk(pessoaJuridica.getId());
-            BemBO.create(b);
+            bemJpaController.create(b);
         }
         GeradorLog.criar(pessoaJuridica.getId(), "PJ", 'C');
     }
 
     public void exibirModalInfo() {
         if (tabela.equals("PF")) {
-            PessoaFisica pessoaFisica = PessoaFisicaBO.findPessoaFisica(Integer.valueOf(idfk));
-            enderecoPessoaFisica = new EnderecoPessoa(pessoaFisica, EnderecoBO.findPFAddress(pessoaFisica.getId()), BemBO.findPFBens(pessoaFisica.getId()));
+            PessoaFisica pessoaFisica = pessoaFisicaJpaController.findPessoaFisica(Integer.valueOf(idfk));
+            enderecoPessoaFisica = new EnderecoPessoa(pessoaFisica, enderecoJpaController.findPFAddress(pessoaFisica.getId()), bemJpaController.findPFBens(pessoaFisica.getId()));
             executado = new Executado();
             pessoaJuridicaSucessao = new PessoaJuridicaSucessao();
         } else if (tabela.equals("PJ")) {
-            PessoaJuridica pessoaJuridica = PessoaJuridicaBO.findPessoaJuridica(Integer.valueOf(idfk));
-            enderecoPessoaJuridica = new EnderecoPessoa(pessoaJuridica, EnderecoBO.findPJAddress(pessoaJuridica.getId()), BemBO.findPJBens(pessoaJuridica.getId()));
+            PessoaJuridica pessoaJuridica = pessoaJuridicaJpaController.findPessoaJuridica(Integer.valueOf(idfk));
+            enderecoPessoaJuridica = new EnderecoPessoa(pessoaJuridica, enderecoJpaController.findPJAddress(pessoaJuridica.getId()), bemJpaController.findPJBens(pessoaJuridica.getId()));
             executado = new Executado();
             pessoaJuridicaSucessao = new PessoaJuridicaSucessao();
         } else if (tabela.equals("PJUD")) {
-            CitacaoBO citacaoBO = new CitacaoBO();
-            RedirecionamentoBO redirecionamentoBO = new RedirecionamentoBO();
-            ProcessoJudicial pjud = ProcessoJudicialBO.findProcessoJudicial(Integer.valueOf(idfk));
+            ProcessoJudicial pjud = new ProcessoJudicialJpaController().findProcessoJudicial(Integer.valueOf(idfk));
             if (pjud.getExecutado().equals("PF")) {
-                PessoaFisica pf = PessoaFisicaBO.findPessoaFisica(pjud.getExecutadoFk());
-                executado = new Executado(pjud, new EnderecoPessoa(pf, EnderecoBO.findPFAddress(pf.getId()), BemBO.findPFBens(pf.getId())), citacaoBO.findByPJUD(pjud.getId()), carregarSocioRedirecionamento(redirecionamentoBO.findByPJUD(pjud.getId())), PenhoraBO.findByPJUD(pjud.getId()), AquisicaoBemBO.findByPJUD(pjud.getId()));
+                PessoaFisica pf = pessoaFisicaJpaController.findPessoaFisica(pjud.getExecutadoFk());
+                executado = new Executado(pjud, new EnderecoPessoa(pf, enderecoJpaController.findPFAddress(pf.getId()), bemJpaController.findPFBens(pf.getId())), citacaoJpaController.findByPJUD(pjud.getId()), carregarSocioRedirecionamento(redirecionamentoJpaController.findByPJUD(pjud.getId())), penhoraJpaController.findByPJUD(pjud.getId()), aquisicaoBemJpaController.findByPJUD(pjud.getId()));
             } else {
-                PessoaJuridica pj = PessoaJuridicaBO.findPessoaJuridica(pjud.getExecutadoFk());
-                executado = new Executado(pjud, new EnderecoPessoa(pj, EnderecoBO.findPFAddress(pj.getId()), BemBO.findPJBens(pj.getId())), citacaoBO.findByPJUD(pjud.getId()), carregarSocioRedirecionamento(redirecionamentoBO.findByPJUD(pjud.getId())), PenhoraBO.findByPJUD(pjud.getId()), AquisicaoBemBO.findByPJUD(pjud.getId()));
+                PessoaJuridica pj = pessoaJuridicaJpaController.findPessoaJuridica(pjud.getExecutadoFk());
+                executado = new Executado(pjud, new EnderecoPessoa(pj, enderecoJpaController.findPFAddress(pj.getId()), bemJpaController.findPJBens(pj.getId())), citacaoJpaController.findByPJUD(pjud.getId()), carregarSocioRedirecionamento(redirecionamentoJpaController.findByPJUD(pjud.getId())), penhoraJpaController.findByPJUD(pjud.getId()), aquisicaoBemJpaController.findByPJUD(pjud.getId()));
             }
             pessoaJuridicaSucessao = new PessoaJuridicaSucessao();
         } else if (tabela.equals("PJS")) {
-            pessoaJuridicaSucessao = PessoaJuridicaSucessaoBO.findPessoaJuridicaSucessao(Integer.valueOf(idfk));
+            pessoaJuridicaSucessao = pessoaJuridicaSucessaoJpaController.findPessoaJuridicaSucessao(Integer.valueOf(idfk));
             executado = new Executado();
         }
     }
@@ -409,11 +430,11 @@ public class TemplateBean implements Serializable {
     public String loadSocio(String tipo, String id) {
         if (tipo != null) {
             if (tipo.equals("PF")) {
-                PessoaFisica pf = PessoaFisicaBO.findPessoaFisica(Integer.valueOf(id));
+                PessoaFisica pf = pessoaFisicaJpaController.findPessoaFisica(Integer.valueOf(id));
                 String cpf = (pf.getCpf() == null ? "Sem CPF" : pf.getCpf().substring(0, 3) + "." + pf.getCpf().substring(3, 6) + "." + pf.getCpf().substring(6, 9) + "-" + pf.getCpf().substring(9));
                 return cpf + " - " + pf.getNome();
             } else {
-                PessoaJuridica pj = PessoaJuridicaBO.findPessoaJuridica(Integer.valueOf(id));
+                PessoaJuridica pj = pessoaJuridicaJpaController.findPessoaJuridica(Integer.valueOf(id));
                 String cnpj = pj.getCnpj().substring(0, 2) + "." + pj.getCnpj().substring(2, 5) + "." + pj.getCnpj().substring(5, 8) + "/" + pj.getCnpj().substring(8, 12) + "-" + pj.getCnpj().substring(12);
                 return cnpj + " - " + pj.getNome();
             }
@@ -425,16 +446,16 @@ public class TemplateBean implements Serializable {
         List<SocioRedirecionamento> socioRedirecionamentoList = new ArrayList<>();
         for (Redirecionamento redirecionamento : redirecionamentoList) {
             if (redirecionamento.getSocio().equals("PF")) {
-                socioRedirecionamentoList.add(new SocioRedirecionamento(PessoaFisicaBO.findPessoaFisica(redirecionamento.getSocioFk()), redirecionamento));
+                socioRedirecionamentoList.add(new SocioRedirecionamento(pessoaFisicaJpaController.findPessoaFisica(redirecionamento.getSocioFk()), redirecionamento));
             } else {
-                socioRedirecionamentoList.add(new SocioRedirecionamento(PessoaJuridicaBO.findPessoaJuridica(redirecionamento.getSocioFk()), redirecionamento));
+                socioRedirecionamentoList.add(new SocioRedirecionamento(pessoaJuridicaJpaController.findPessoaJuridica(redirecionamento.getSocioFk()), redirecionamento));
             }
         }
         return socioRedirecionamentoList;
     }
 
     public void exibirSucessao() {
-        pessoaJuridicaSucessao = PessoaJuridicaSucessaoBO.findPessoaJuridicaSucessao(Integer.valueOf(sucessaoId));
+        pessoaJuridicaSucessao = pessoaJuridicaSucessaoJpaController.findPessoaJuridicaSucessao(Integer.valueOf(sucessaoId));
     }
 
     public void search() throws IOException {

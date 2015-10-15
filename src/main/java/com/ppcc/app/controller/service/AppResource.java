@@ -5,18 +5,6 @@
  */
 package com.ppcc.app.controller.service;
 
-import bo.AquisicaoBemBO;
-import bo.BemBO;
-import bo.ChartsBO;
-import bo.CitacaoBO;
-import bo.EnderecoBO;
-import bo.LogBO;
-import bo.PessoaFisicaBO;
-import bo.PessoaJuridicaBO;
-import bo.PessoaJuridicaSucessaoBO;
-import bo.ProcessoJudicialBO;
-import bo.RedirecionamentoBO;
-import bo.UsuarioBO;
 import com.ppcc.app.model.entity.AquisicaoBem;
 import com.ppcc.app.model.entity.Bem;
 import com.ppcc.app.model.entity.Citacao;
@@ -32,6 +20,19 @@ import com.ppcc.app.model.entity.PessoaJuridicaSucessao;
 import com.ppcc.app.model.entity.ProcessoJudicial;
 import com.ppcc.app.model.entity.Redirecionamento;
 import com.ppcc.app.model.entity.VinculoProcessual;
+import com.ppcc.app.model.jpa.controller.AquisicaoBemJpaController;
+import com.ppcc.app.model.jpa.controller.AutorizacaoJpaController;
+import com.ppcc.app.model.jpa.controller.BemJpaController;
+import com.ppcc.app.model.jpa.controller.CitacaoJpaController;
+import com.ppcc.app.model.jpa.controller.EnderecoJpaController;
+import com.ppcc.app.model.jpa.controller.LogJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaFisicaFisicaJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaFisicaJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaJuridicaJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaJuridicaSucessaoJpaController;
+import com.ppcc.app.model.jpa.controller.ProcessoJudicialJpaController;
+import com.ppcc.app.model.jpa.controller.RedirecionamentoJpaController;
+import com.ppcc.app.model.jpa.controller.UsuarioJpaController;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,8 +50,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import util.Cookie;
-import util.TimestampUtils;
+import com.ppcc.app.util.Cookie;
+import com.ppcc.app.util.TimestampUtils;
 
 /**
  * REST Web Service
@@ -68,7 +69,15 @@ public class AppResource {
      */
     public AppResource() {
     }
-
+    
+    private BemJpaController bemJpaController = new BemJpaController();
+    private PessoaFisicaJpaController pessoaFisicaJpaController = new PessoaFisicaJpaController();
+    private PessoaJuridicaJpaController pessoaJuridicaJpaController = new PessoaJuridicaJpaController();
+    private ProcessoJudicialJpaController processoJudicialJpaController = new ProcessoJudicialJpaController();
+    private EnderecoJpaController enderecoJpaController = new EnderecoJpaController();
+    private PessoaJuridicaSucessaoJpaController pessoaJuridicaSucessaoJpaController = new PessoaJuridicaSucessaoJpaController();
+    private AutorizacaoJpaController autorizacaoJpaController = new AutorizacaoJpaController();
+    
     /**
      * Retrieves representation of an instance of service.ReaverResource
      *
@@ -97,8 +106,8 @@ public class AppResource {
     @Produces("application/json")
     public String getPessoasFisicas(@QueryParam("usuario") String usuario) {
         JSONArray jsonArray = new JSONArray();
-        Instituicao instituicao = UsuarioBO.findAutorizacaoByCPF(usuario).getInstituicaoFk();
-        List<PessoaFisica> pessoaFisicaList = PessoaFisicaBO.findAllActive(instituicao);
+        Instituicao instituicao = autorizacaoJpaController.findAutorizacaoByCPF(usuario).getInstituicaoFk();
+        List<PessoaFisica> pessoaFisicaList = pessoaFisicaJpaController.findAllActive(instituicao);
         for (PessoaFisica pf : pessoaFisicaList) {
             String cpf = pf.getCpf() == null ? "Sem CPF" : pf.getCpf().substring(0, 3) + "." + pf.getCpf().substring(3, 6) + "." + pf.getCpf().substring(6, 9) + "-" + pf.getCpf().substring(9);
             JSONObject jsonObject = new JSONObject();
@@ -113,9 +122,9 @@ public class AppResource {
     @Path("/getPessoasJuridicas")
     @Produces("application/json")
     public String getPessoasJuridicas(@QueryParam("usuario") String usuario) {
-        Instituicao instituicao = UsuarioBO.findAutorizacaoByCPF(usuario).getInstituicaoFk();
+        Instituicao instituicao = autorizacaoJpaController.findAutorizacaoByCPF(usuario).getInstituicaoFk();
         JSONArray jsonArray = new JSONArray();
-        List<PessoaJuridica> pessoaJuridicaList = PessoaJuridicaBO.findAllActive(instituicao);
+        List<PessoaJuridica> pessoaJuridicaList = pessoaJuridicaJpaController.findAllActive(instituicao);
         for (PessoaJuridica pj : pessoaJuridicaList) {
             String cnpj = pj.getCnpj().substring(0, 2) + "." + pj.getCnpj().substring(2, 5) + "." + pj.getCnpj().substring(5, 8) + "/" + pj.getCnpj().substring(8, 12) + "-" + pj.getCnpj().substring(12);
             JSONObject jsonObject = new JSONObject();
@@ -130,12 +139,12 @@ public class AppResource {
     @Path("/getPessoasFisicasTable")
     @Produces("application/json")
     public String getPessoasFisicasTable(@QueryParam("usuario") String usuario) {
-        Instituicao instituicao = UsuarioBO.findAutorizacaoByCPF(usuario).getInstituicaoFk();
+        Instituicao instituicao = autorizacaoJpaController.findAutorizacaoByCPF(usuario).getInstituicaoFk();
         JSONArray jsonArray = new JSONArray();
-        List<PessoaFisica> pessoaFisicaList = PessoaFisicaBO.findAllActive(instituicao);
+        List<PessoaFisica> pessoaFisicaList = pessoaFisicaJpaController.findAllActive(instituicao);
         for (PessoaFisica pf : pessoaFisicaList) {
-            Endereco end = EnderecoBO.findPFAddress(pf.getId());
-            List<Bem> bemList = BemBO.findPFBens(pf.getId());
+            Endereco end = enderecoJpaController.findPFAddress(pf.getId());
+            List<Bem> bemList = bemJpaController.findPFBens(pf.getId());
             String sexo = pf.getSexo() == null ? "-" : "M".equals(pf.getSexo().toString()) ? "Masculino" : "Feminino";
             String cpf = pf.getCpf() == null ? "-" : pf.getCpf().substring(0, 3) + "." + pf.getCpf().substring(3, 6) + "." + pf.getCpf().substring(6, 9) + "-" + pf.getCpf().substring(9);
             String rg = pf.getRg() == null ? "-" : pf.getRg();
@@ -192,11 +201,11 @@ public class AppResource {
     @Produces("application/json")
     public String getPessoasJuridicasTable(@QueryParam("usuario") String usuario) {
         JSONArray jsonArray = new JSONArray();
-        Instituicao instituicao = UsuarioBO.findAutorizacaoByCPF(usuario).getInstituicaoFk();
-        List<PessoaJuridica> pessoaJuridicaList = PessoaJuridicaBO.findAllActive(instituicao);
+        Instituicao instituicao = autorizacaoJpaController.findAutorizacaoByCPF(usuario).getInstituicaoFk();
+        List<PessoaJuridica> pessoaJuridicaList = pessoaJuridicaJpaController.findAllActive(instituicao);
         for (PessoaJuridica pj : pessoaJuridicaList) {
-            Endereco end = EnderecoBO.findPJAddress(pj.getId());
-            List<Bem> bemList = BemBO.findPJBens(pj.getId());
+            Endereco end = enderecoJpaController.findPJAddress(pj.getId());
+            List<Bem> bemList = bemJpaController.findPJBens(pj.getId());
             String cnpj = pj.getCnpj() == null ? "-" : pj.getCnpj().substring(0, 2) + "." + pj.getCnpj().substring(2, 5) + "." + pj.getCnpj().substring(5, 8) + "/" + pj.getCnpj().substring(8, 12) + "-" + pj.getCnpj().substring(12);
             String nomeFantasia = pj.getNomeFantasia() == null ? "-" : pj.getNomeFantasia();
             String tipoEmpresarial = pj.getTipoEmpresarialFk() == null ? "-" : pj.getTipoEmpresarialFk().getTipo();
@@ -248,21 +257,21 @@ public class AppResource {
     @Produces("application/json")
     public String getProcessosJudiciaisTable() {
         JSONArray jsonArray = new JSONArray();
-        List<ProcessoJudicial> processoJudicialList = ProcessoJudicialBO.findAllActive();
+        List<ProcessoJudicial> processoJudicialList = processoJudicialJpaController.findAllActive();
         for (ProcessoJudicial pjud : processoJudicialList) {
             Endereco end = new Endereco();
             List<Bem> bemList = new ArrayList<>();
-            List<Citacao> citacaoList = CitacaoBO.findByPJUD(pjud.getId());
-            List<Redirecionamento> redirecionamentoList = RedirecionamentoBO.findByPJUD(pjud.getId());
-            List<AquisicaoBem> aquisicaoBemList = AquisicaoBemBO.findByPJUD(pjud.getId());
+            List<Citacao> citacaoList = new CitacaoJpaController().findByPJUD(pjud.getId());
+            List<Redirecionamento> redirecionamentoList = new RedirecionamentoJpaController().findByPJUD(pjud.getId());
+            List<AquisicaoBem> aquisicaoBemList = new AquisicaoBemJpaController().findByPJUD(pjud.getId());
             PessoaFisica pf = new PessoaFisica();
             PessoaJuridica pj = new PessoaJuridica();
             String detalhes = "";
             String executado = "";
             if (pjud.getExecutado().equals("PF")) {
-                pf = PessoaFisicaBO.findPessoaFisica(pjud.getExecutadoFk());
-                end = EnderecoBO.findPFAddress(pf.getId());
-                bemList = BemBO.findPFBens(pf.getId());
+                pf = pessoaFisicaJpaController.findPessoaFisica(pjud.getExecutadoFk());
+                end = enderecoJpaController.findPFAddress(pf.getId());
+                bemList = bemJpaController.findPFBens(pf.getId());
                 executado = pf.getNome() + " - " + (pf.getCpf() == null ? "Sem CPF" : pf.getCpf().substring(0, 3) + "." + pf.getCpf().substring(3, 6) + "." + pf.getCpf().substring(6, 9) + "-" + pf.getCpf().substring(9));
                 detalhes += (pf.getSexo() == null ? "" : "M".equals(pf.getSexo().toString()) ? "Masculino" : "Feminino") + " " + pf.getApelido() + " " + pf.getTituloDeEleitor() + " " + pf.getInss() + " "
                         + pf.getNomeDoPai() + " " + pf.getNomeDaMae() + " " + pf.getNomeDoConjuge() + " " + pf.getRg() + " " + pf.getRgOrgaoEmissor() + " " + (pf.getRgUfFk() == null ? "" : pf.getRgUfFk().getUf()) + " "
@@ -289,9 +298,9 @@ public class AppResource {
                     detalhes += " " + bem.getDataDeAquisicao() + " " + bem.getDataDeTransferenciaOuExtincao() + " " + bem.getDescricao() + " " + bem.getEndereco() + " " + bem.getValor() + " " + (bem.getTipoBemFk() == null ? "" : bem.getTipoBemFk().getTipo());
                 }
             } else {
-                pj = PessoaJuridicaBO.findPessoaJuridica(pjud.getExecutadoFk());
-                end = EnderecoBO.findPJAddress(pj.getId());
-                bemList = BemBO.findPJBens(pj.getId());
+                pj = pessoaJuridicaJpaController.findPessoaJuridica(pjud.getExecutadoFk());
+                end = enderecoJpaController.findPJAddress(pj.getId());
+                bemList = bemJpaController.findPJBens(pj.getId());
                 executado = pj.getNome() + " - " + pj.getCnpj().substring(0, 2) + "." + pj.getCnpj().substring(2, 5) + "." + pj.getCnpj().substring(5, 8) + "/" + pj.getCnpj().substring(8, 12) + "-" + pj.getCnpj().substring(12);
                 detalhes += pj.getNomeFantasia() + " " + (pj.getTipoEmpresarialFk() == null ? "" : pj.getTipoEmpresarialFk().getTipo()) + " " + pj.getInscricaoEstadual() + " " + pj.getInscricaoMunicipal() + " "
                         + (pj.getSituacao() == null ? "" : "A".equals(pj.getSituacao().toString()) ? "Ativo" : "Inativo") + " " + pj.getMotivoDaDesativacao() + " "
@@ -359,16 +368,16 @@ public class AppResource {
     @Produces("application/json")
     public String getMovimentacao(@QueryParam("ano") Integer ano, @QueryParam("usuario") String usuario) {
         JSONArray jsonArray = new JSONArray();
-        Instituicao instituicao = UsuarioBO.findAutorizacaoByCPF(usuario).getInstituicaoFk();
+        Instituicao instituicao = autorizacaoJpaController.findAutorizacaoByCPF(usuario).getInstituicaoFk();
         JSONObject jsonObject = new JSONObject();
         for (Integer i = 1; i <= 12; i++) {
-            jsonObject.put("pf" + i, ChartsBO.countPFByMonth(ano, i, instituicao));
+            jsonObject.put("pf" + i, pessoaFisicaJpaController.countPFByMonth(ano, i, instituicao));
         }
         for (Integer i = 1; i <= 12; i++) {
-            jsonObject.put("pj" + i, ChartsBO.countPJByMonth(ano, i, instituicao));
+            jsonObject.put("pj" + i, pessoaJuridicaJpaController.countPJByMonth(ano, i, instituicao));
         }
         for (Integer i = 1; i <= 12; i++) {
-            jsonObject.put("pjud" + i, ChartsBO.countPJUDByMonth(ano, i, instituicao));
+            jsonObject.put("pjud" + i, processoJudicialJpaController.countPJUDByMonth(ano, i, instituicao));
         }
         jsonArray.put(jsonObject);
 
@@ -379,7 +388,7 @@ public class AppResource {
     @Path("/checkCNPJ")
     @Produces("application/json")
     public String checkCNPJ(@QueryParam("cnpj") String cnpj) {
-        PessoaJuridica pessoaJuridica = PessoaJuridicaBO.findByCNPJ(cnpj);
+        PessoaJuridica pessoaJuridica = pessoaJuridicaJpaController.findByCNPJ(cnpj);
         if (pessoaJuridica == null) {
             return "true";
         } else {
@@ -391,7 +400,7 @@ public class AppResource {
     @Path("/checkCPF")
     @Produces("application/json")
     public String checkCPF(@QueryParam("cpf") String cpf) {
-        PessoaFisica pessoaFisica = PessoaFisicaBO.findByCPF(cpf);
+        PessoaFisica pessoaFisica = pessoaFisicaJpaController.findByCPF(cpf);
         if (pessoaFisica == null) {
             return "true";
         } else {
@@ -403,16 +412,16 @@ public class AppResource {
     @Path("/getArrecadacao")
     @Produces("application/json")
     public String getArrecadacao(@QueryParam("ano") Integer ano, @QueryParam("usuario") String usuario) {
-        Instituicao instituicao = UsuarioBO.findAutorizacaoByCPF(usuario).getInstituicaoFk();
+        Instituicao instituicao = autorizacaoJpaController.findAutorizacaoByCPF(usuario).getInstituicaoFk();
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
         for (Integer i = 1; i <= 12; i++) {
-            jsonObject.put("value" + i, ChartsBO.sumPJUDValueBeforeMonth(ano, i, instituicao));
+            jsonObject.put("value" + i, processoJudicialJpaController.sumPJUDValueBeforeMonth(ano, i, instituicao));
         }
         for (Integer i = 1; i <= 12; i++) {
-            jsonObject.put("arrecadacao" + i, ChartsBO.sumPJUDArrecadacaoBeforeMonth(ano, i, instituicao));
+            jsonObject.put("arrecadacao" + i, processoJudicialJpaController.sumPJUDArrecadacaoBeforeMonth(ano, i, instituicao));
         }
-        jsonObject.put("count", ChartsBO.countPJUDValueBeforeMonth(ano, 12, instituicao));
+        jsonObject.put("count", processoJudicialJpaController.countPJUDValueBeforeMonth(ano, 12, instituicao));
         jsonArray.put(jsonObject);
 
         return jsonArray.toString();
@@ -422,14 +431,14 @@ public class AppResource {
     @Path("/getPizza")
     @Produces("application/json")
     public String getPizza(@QueryParam("usuario") String usuario) {
-        Instituicao instituicao = UsuarioBO.findAutorizacaoByCPF(usuario).getInstituicaoFk();
+        Instituicao instituicao = autorizacaoJpaController.findAutorizacaoByCPF(usuario).getInstituicaoFk();
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Andamento", ChartsBO.getPJUDSituations("Andamento", instituicao));
-        jsonObject.put("Arquivado", ChartsBO.getPJUDSituations("Arquivado", instituicao));
-        jsonObject.put("Extinto", ChartsBO.getPJUDSituations("Extinto", instituicao));
-        jsonObject.put("Julgado", ChartsBO.getPJUDSituations("Julgado", instituicao));
-        jsonObject.put("Suspenso", ChartsBO.getPJUDSituations("Suspenso", instituicao));
+        jsonObject.put("Andamento", processoJudicialJpaController.getPJUDSituations("Andamento", instituicao));
+        jsonObject.put("Arquivado", processoJudicialJpaController.getPJUDSituations("Arquivado", instituicao));
+        jsonObject.put("Extinto", processoJudicialJpaController.getPJUDSituations("Extinto", instituicao));
+        jsonObject.put("Julgado", processoJudicialJpaController.getPJUDSituations("Julgado", instituicao));
+        jsonObject.put("Suspenso", processoJudicialJpaController.getPJUDSituations("Suspenso", instituicao));
         jsonArray.put(jsonObject);
 
         return jsonArray.toString();
@@ -440,9 +449,9 @@ public class AppResource {
     @Produces("application/json")
     public String getLogs(@QueryParam("quantidade") Integer quantidade, 
             @QueryParam("indice") Integer indice, @QueryParam("usuario") String usuario) {
-        Instituicao instituicao = UsuarioBO.findAutorizacaoByCPF(usuario).getInstituicaoFk();
+        Instituicao instituicao = autorizacaoJpaController.findAutorizacaoByCPF(usuario).getInstituicaoFk();
         //List<Log> logList = logBO.findLogEntities(quantidade, indice);
-        List<Log> logList = LogBO.findLogByInstituicao(quantidade, instituicao);
+        List<Log> logList = new LogJpaController().findLogByInstituicao(quantidade, instituicao);
         JSONArray jsonArray = new JSONArray();
 
         for (int i = 0; i < logList.size(); i++) {
@@ -464,25 +473,25 @@ public class AppResource {
         String operacao = "";
         String detalhes = "";
         if (log.getTabela().equals("PF")) {
-            PessoaFisica pf = PessoaFisicaBO.findPessoaFisica(log.getIdFk());
+            PessoaFisica pf = pessoaFisicaJpaController.findPessoaFisica(log.getIdFk());
             String cpf = pf.getCpf() == null ? "Sem CPF" : pf.getCpf().substring(0, 3) + "." + pf.getCpf().substring(3, 6) + "." + pf.getCpf().substring(6, 9) + "-" + pf.getCpf().substring(9);
             tabela += "<span class='feed-label'>Pessoa Física ";
             String info = pf.getNome() + " - " + cpf;
             info = info.length() >= 35 ? info.substring(0, 32) + "..." : info;
             detalhes += "<strong>" + info + "</strong>";
         } else if (log.getTabela().equals("PJ")) {
-            PessoaJuridica pj = PessoaJuridicaBO.findPessoaJuridica(log.getIdFk());
+            PessoaJuridica pj = pessoaJuridicaJpaController.findPessoaJuridica(log.getIdFk());
             String cnpj = pj.getCnpj().substring(0, 2) + "." + pj.getCnpj().substring(2, 5) + "." + pj.getCnpj().substring(5, 8) + "/" + pj.getCnpj().substring(8, 12) + "-" + pj.getCnpj().substring(12);
             tabela += "<span class='feed-label'>Pessoa Juridica ";
             String info = pj.getNome() + " - " + cnpj;
             info = info.length() >= 35 ? info.substring(0, 32) + "..." : info;
             detalhes += "<strong>" + info + "</strong>";
         } else if (log.getTabela().equals("PJUD")) {
-            ProcessoJudicial pjud = ProcessoJudicialBO.findProcessoJudicial(log.getIdFk());
+            ProcessoJudicial pjud = processoJudicialJpaController.findProcessoJudicial(log.getIdFk());
             tabela += "<span class='feed-label'>Processo Judicial ";
             detalhes += "<strong>" + pjud.getNumeroDoProcesso() + "</strong>";
         } else if (log.getTabela().equals("PJS")) {
-            PessoaJuridicaSucessao pjs = PessoaJuridicaSucessaoBO.findPessoaJuridicaSucessao(log.getIdFk());
+            PessoaJuridicaSucessao pjs = pessoaJuridicaSucessaoJpaController.findPessoaJuridicaSucessao(log.getIdFk());
             tabela += "<span class='feed-label'>Sucessão Empresarial ";
             String info = pjs.getPessoaJuridicaSucedidaFk().getNome() + " -> " + pjs.getPessoaJuridicaSucessoraFk().getNome();
             info = info.length() >= 35 ? info.substring(0, 32) + "..." : info;
@@ -504,8 +513,8 @@ public class AppResource {
     @Produces("application/json")
     public String getSucessoes(@QueryParam("id") Integer id) {
         List<PessoaJuridicaSucessao> pessoaJuridicaSucessaoList = new ArrayList<>();
-        pessoaJuridicaSucessaoList.addAll(PessoaJuridicaSucessaoBO.findSucedidas(id));
-        pessoaJuridicaSucessaoList.addAll(PessoaJuridicaSucessaoBO.findSucessoras(id));
+        pessoaJuridicaSucessaoList.addAll(pessoaJuridicaSucessaoJpaController.findSucedidas(id));
+        pessoaJuridicaSucessaoList.addAll(pessoaJuridicaSucessaoJpaController.findSucessoras(id));
         JSONArray jsonArray = new JSONArray();
         for (PessoaJuridicaSucessao pjs : pessoaJuridicaSucessaoList) {
             JSONObject jsonObject = new JSONObject();

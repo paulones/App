@@ -5,59 +5,60 @@
  */
 package com.ppcc.app.controller.bean;
 
-import bo.AquisicaoBemBO;
-import bo.AquisicaoBemHistoricoBO;
-import bo.BemBO;
-import bo.CitacaoBO;
-import bo.CitacaoHistoricoBO;
-import bo.EnderecoBO;
-import bo.PenhoraBO;
-import bo.PenhoraHistoricoBO;
-import bo.PessoaFisicaBO;
-import bo.PessoaFisicaJuridicaBO;
-import bo.PessoaJuridicaBO;
-import bo.PessoaJuridicaJuridicaBO;
-import bo.ProcessoJudicialBO;
-import bo.ProcessoJudicialHistoricoBO;
-import bo.ProcuradorBO;
-import bo.RedirecionamentoBO;
-import bo.RedirecionamentoHistoricoBO;
-import bo.SituacaoBO;
-import bo.TipoPenhoraBO;
-import bo.TipoProcessoBO;
-import bo.TipoRecursoBO;
-import bo.UsuarioBO;
-import bo.UtilBO;
-import bo.VinculoProcessualBO;
-import bo.VinculoProcessualHistoricoBO;
-import entidade.AquisicaoBem;
-import entidade.AquisicaoBemHistorico;
-import entidade.Bem;
-import entidade.Citacao;
-import entidade.CitacaoHistorico;
-import entidade.EnderecoPessoa;
-import entidade.Executado;
-import entidade.ExecutadoHistorico;
-import entidade.Instituicao;
-import entidade.Penhora;
-import entidade.PenhoraHistorico;
-import entidade.PessoaFisica;
-import entidade.PessoaFisicaJuridica;
-import entidade.PessoaJuridica;
-import entidade.PessoaJuridicaJuridica;
-import entidade.ProcessoJudicial;
-import entidade.ProcessoJudicialHistorico;
-import entidade.Procurador;
-import entidade.Redirecionamento;
-import entidade.RedirecionamentoHistorico;
-import entidade.Situacao;
-import entidade.SocioRedirecionamento;
-import entidade.SocioRedirecionamentoHistorico;
-import entidade.TipoPenhora;
-import entidade.TipoProcesso;
-import entidade.TipoRecurso;
-import entidade.VinculoProcessual;
-import entidade.VinculoProcessualHistorico;
+import com.ppcc.app.model.entity.AquisicaoBem;
+import com.ppcc.app.model.entity.AquisicaoBemHistorico;
+import com.ppcc.app.model.entity.Bem;
+import com.ppcc.app.model.entity.Citacao;
+import com.ppcc.app.model.entity.CitacaoHistorico;
+import com.ppcc.app.model.entity.EnderecoPessoa;
+import com.ppcc.app.model.entity.Executado;
+import com.ppcc.app.model.entity.ExecutadoHistorico;
+import com.ppcc.app.model.entity.Instituicao;
+import com.ppcc.app.model.entity.Penhora;
+import com.ppcc.app.model.entity.PenhoraHistorico;
+import com.ppcc.app.model.entity.PessoaFisica;
+import com.ppcc.app.model.entity.PessoaFisicaJuridica;
+import com.ppcc.app.model.entity.PessoaJuridica;
+import com.ppcc.app.model.entity.PessoaJuridicaJuridica;
+import com.ppcc.app.model.entity.ProcessoJudicial;
+import com.ppcc.app.model.entity.ProcessoJudicialHistorico;
+import com.ppcc.app.model.entity.Procurador;
+import com.ppcc.app.model.entity.Redirecionamento;
+import com.ppcc.app.model.entity.RedirecionamentoHistorico;
+import com.ppcc.app.model.entity.Situacao;
+import com.ppcc.app.model.entity.SocioRedirecionamento;
+import com.ppcc.app.model.entity.SocioRedirecionamentoHistorico;
+import com.ppcc.app.model.entity.TipoPenhora;
+import com.ppcc.app.model.entity.TipoProcesso;
+import com.ppcc.app.model.entity.TipoRecurso;
+import com.ppcc.app.model.entity.VinculoProcessual;
+import com.ppcc.app.model.entity.VinculoProcessualHistorico;
+import com.ppcc.app.model.jpa.controller.AquisicaoBemHistoricoJpaController;
+import com.ppcc.app.model.jpa.controller.AquisicaoBemJpaController;
+import com.ppcc.app.model.jpa.controller.AutorizacaoJpaController;
+import com.ppcc.app.model.jpa.controller.BemJpaController;
+import com.ppcc.app.model.jpa.controller.CitacaoHistoricoJpaController;
+import com.ppcc.app.model.jpa.controller.CitacaoJpaController;
+import com.ppcc.app.model.jpa.controller.EnderecoJpaController;
+import com.ppcc.app.model.jpa.controller.PenhoraHistoricoJpaController;
+import com.ppcc.app.model.jpa.controller.PenhoraJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaFisicaJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaFisicaJuridicaJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaJuridicaJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaJuridicaJuridicaJpaController;
+import com.ppcc.app.model.jpa.controller.ProcessoJudicialHistoricoJpaController;
+import com.ppcc.app.model.jpa.controller.ProcessoJudicialJpaController;
+import com.ppcc.app.model.jpa.controller.ProcuradorJpaController;
+import com.ppcc.app.model.jpa.controller.RedirecionamentoHistoricoJpaController;
+import com.ppcc.app.model.jpa.controller.RedirecionamentoJpaController;
+import com.ppcc.app.model.jpa.controller.SituacaoJpaController;
+import com.ppcc.app.model.jpa.controller.TipoPenhoraJpaController;
+import com.ppcc.app.model.jpa.controller.TipoProcessoJpaController;
+import com.ppcc.app.model.jpa.controller.TipoRecursoJpaController;
+import com.ppcc.app.model.jpa.controller.UsuarioJpaController;
+import com.ppcc.app.model.jpa.controller.UtilJpaController;
+import com.ppcc.app.model.jpa.controller.VinculoProcessualHistoricoJpaController;
+import com.ppcc.app.model.jpa.controller.VinculoProcessualJpaController;
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
@@ -71,9 +72,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-import util.Cookie;
-import util.GeradorLog;
-import util.MetodosConvencionais;
+import com.ppcc.app.util.Cookie;
+import com.ppcc.app.util.GeradorLog;
+import com.ppcc.app.util.MetodosConvencionais;
 
 /**
  *
@@ -122,8 +123,27 @@ public class ProcessoJudicialBean implements Serializable {
     private List<AquisicaoBem> oldAquisicaoBemList;
     private List<AquisicaoBemHistorico> aquisicaoBemHistoricoList;
     private List<List<AquisicaoBemHistorico>> listOfAquisicaoBemHistoricoList;
-    ;
-
+    
+    private AquisicaoBemJpaController aquisicaoBemJpaController = new AquisicaoBemJpaController();
+    private AquisicaoBemHistoricoJpaController aquisicaoBemHistoricoJpaController = new AquisicaoBemHistoricoJpaController();
+    private BemJpaController bemJpaController = new BemJpaController();
+    private CitacaoJpaController citacaoJpaController = new CitacaoJpaController();
+    private CitacaoHistoricoJpaController citacaoHistoricoJpaController = new CitacaoHistoricoJpaController();
+    private EnderecoJpaController enderecoJpaController = new EnderecoJpaController();
+    private PenhoraJpaController penhoraJpaController = new PenhoraJpaController();
+    private PenhoraHistoricoJpaController penhoraHistoricoJpaController = new PenhoraHistoricoJpaController();
+    private PessoaFisicaJpaController pessoaFisicaJpaController = new PessoaFisicaJpaController();
+    private PessoaJuridicaJpaController pessoaJuridicaJpaController = new PessoaJuridicaJpaController();
+    private ProcessoJudicialJpaController processoJudicialJpaController = new ProcessoJudicialJpaController();
+    private ProcessoJudicialHistoricoJpaController processoJudicialHistoricoJpaController = new ProcessoJudicialHistoricoJpaController();
+    private RedirecionamentoJpaController redirecionamentoJpaController = new RedirecionamentoJpaController();
+    private RedirecionamentoHistoricoJpaController redirecionamentoHistoricoJpaController = new RedirecionamentoHistoricoJpaController();
+    private TipoPenhoraJpaController tipoPenhora1JpaController = new TipoPenhoraJpaController();
+    private UsuarioJpaController usuarioJpaController = new UsuarioJpaController();
+    private VinculoProcessualJpaController vinculoProcessualJpaController = new VinculoProcessualJpaController();
+    
+    
+    
     private Integer vinculos;
     private String executadoPF;
     private String executadoPJ;
@@ -185,7 +205,7 @@ public class ProcessoJudicialBean implements Serializable {
                 } else {                                    // Alteração
                     try {
                         Integer id = Integer.valueOf(request.getParameter("id"));
-                        processoJudicial = ProcessoJudicialBO.findProcessoJudicial(id);
+                        processoJudicial = processoJudicialJpaController.findProcessoJudicial(id);
                         if (processoJudicial == null) {
                             FacesContext.getCurrentInstance().getExternalContext().redirect("cadastrar.xhtml");
                         } else {
@@ -193,7 +213,7 @@ public class ProcessoJudicialBean implements Serializable {
                             for (VinculoProcessual vinculoProcessual : processoJudicial.getVinculoProcessualCollection()) {
                                 vinculoProcessualList.add(vinculoProcessual);
                             }
-                            List<Citacao> citacaoList = CitacaoBO.findByPJUD(id);
+                            List<Citacao> citacaoList = citacaoJpaController.findByPJUD(id);
                             for (Citacao citacao : citacaoList) {
                                 if (citacao.getTipoCitacao().equals("AR")) {
                                     arList.add(citacao);
@@ -212,10 +232,10 @@ public class ProcessoJudicialBean implements Serializable {
                                     enderecosSocios++;
                                 }
                             }
-                            socioRedirecionamentoList = carregarSocioRedirecionamento(RedirecionamentoBO.findByPJUD(id));
+                            socioRedirecionamentoList = carregarSocioRedirecionamento(redirecionamentoJpaController.findByPJUD(id));
                             initialLoad = !socioRedirecionamentoList.isEmpty();
                             oldSocioRedirecionamentoList = new ArrayList<>();
-                            oldSocioRedirecionamentoList = carregarSocioRedirecionamento(RedirecionamentoBO.findByPJUD(id));
+                            oldSocioRedirecionamentoList = carregarSocioRedirecionamento(redirecionamentoJpaController.findByPJUD(id));
                             
                             vinculos = vinculoProcessualList.size();
                             if (processoJudicial.getExecutado().equals("PF")) {
@@ -227,7 +247,7 @@ public class ProcessoJudicialBean implements Serializable {
                             }
                             refreshListaDeBens(null);
 
-                            oldCitacaoList = CitacaoBO.findByPJUD(id);
+                            oldCitacaoList = citacaoJpaController.findByPJUD(id);
                             for (Citacao citacao : oldCitacaoList) {
                                 if (citacao.getTipoCitacao().equals("ES")) {
                                     if (citacao.getSocio() != null && citacao.getSocioFk() != null) {
@@ -235,13 +255,13 @@ public class ProcessoJudicialBean implements Serializable {
                                     }
                                 }
                             }
-                            oldPenhoraList = PenhoraBO.findByPJUD(id);
+                            oldPenhoraList = penhoraJpaController.findByPJUD(id);
                             for (Penhora penhora : oldPenhoraList) {
                                 if (penhora.getSocio() != null && penhora.getSocioFk() != null) {
                                     penhora.setSocioTipo(penhora.getSocio() + penhora.getSocioFk());
                                 }
                             }
-                            List<AquisicaoBem> aquisicaoBemList = AquisicaoBemBO.findByPJUD(id);
+                            List<AquisicaoBem> aquisicaoBemList = aquisicaoBemJpaController.findByPJUD(id);
                             int i = 0;
                             List<AquisicaoBem> aquisicaoBemListTemp = new ArrayList<>();
                             while (i < aquisicaoBemList.size()) {
@@ -252,8 +272,8 @@ public class ProcessoJudicialBean implements Serializable {
                                 }
                                 i++;
                             }
-                            oldAquisicaoBemList = AquisicaoBemBO.findByPJUD(id);
-                            oldProcessoJudicial = ProcessoJudicialBO.findProcessoJudicial(id);
+                            oldAquisicaoBemList = aquisicaoBemJpaController.findByPJUD(id);
+                            oldProcessoJudicial = processoJudicialJpaController.findProcessoJudicial(id);
 
                             prepararHistorico(processoJudicial, citacaoList, socioRedirecionamentoList, oldPenhoraList, aquisicaoBemList);
 
@@ -270,30 +290,30 @@ public class ProcessoJudicialBean implements Serializable {
 
     public void carregarHistorico(String idStr, String tipo) {
         Integer id = Integer.valueOf(idStr);
-        processoJudicial = ProcessoJudicialBO.findProcessoJudicial(id);
+        processoJudicial = processoJudicialJpaController.findProcessoJudicial(id);
         executadoHistoricoList = new ArrayList<>();
         EnderecoPessoa enderecoPessoa = new EnderecoPessoa();
         // Inserção do registro atual
         if (processoJudicial.getExecutado().equals("PF")) {
-            PessoaFisica pessoaFisica = PessoaFisicaBO.findPessoaFisica(processoJudicial.getExecutadoFk());
-            enderecoPessoa = new EnderecoPessoa(pessoaFisica, EnderecoBO.findPFAddress(pessoaFisica.getId()), BemBO.findPFBens(pessoaFisica.getId()));
+            PessoaFisica pessoaFisica = pessoaFisicaJpaController.findPessoaFisica(processoJudicial.getExecutadoFk());
+            enderecoPessoa = new EnderecoPessoa(pessoaFisica, enderecoJpaController.findPFAddress(pessoaFisica.getId()), bemJpaController.findPFBens(pessoaFisica.getId()));
         } else if (processoJudicial.getExecutado().equals("PJ")) {
-            PessoaJuridica pessoaJuridica = PessoaJuridicaBO.findPessoaJuridica(processoJudicial.getExecutadoFk());
-            enderecoPessoa = new EnderecoPessoa(pessoaJuridica, EnderecoBO.findPJAddress(pessoaJuridica.getId()), BemBO.findPJBens(pessoaJuridica.getId()));
+            PessoaJuridica pessoaJuridica = pessoaJuridicaJpaController.findPessoaJuridica(processoJudicial.getExecutadoFk());
+            enderecoPessoa = new EnderecoPessoa(pessoaJuridica, enderecoJpaController.findPJAddress(pessoaJuridica.getId()), bemJpaController.findPJBens(pessoaJuridica.getId()));
         }
-        executadoHistorico = prepararRegistroAtual(processoJudicial, enderecoPessoa, CitacaoBO.findByPJUD(processoJudicial.getId()), carregarSocioRedirecionamento(RedirecionamentoBO.findByPJUD(processoJudicial.getId())), PenhoraBO.findByPJUD(processoJudicial.getId()), AquisicaoBemBO.findByPJUD(processoJudicial.getId()));
+        executadoHistorico = prepararRegistroAtual(processoJudicial, enderecoPessoa, citacaoJpaController.findByPJUD(processoJudicial.getId()), carregarSocioRedirecionamento(redirecionamentoJpaController.findByPJUD(processoJudicial.getId())), penhoraJpaController.findByPJUD(processoJudicial.getId()), aquisicaoBemJpaController.findByPJUD(processoJudicial.getId()));
         executadoHistoricoList.add(executadoHistorico);
         // Inserção dos históricos
-        List<ProcessoJudicialHistorico> processoJudicialHistoricoList = ProcessoJudicialHistoricoBO.findAllByPJUD(id);
+        List<ProcessoJudicialHistorico> processoJudicialHistoricoList = processoJudicialHistoricoJpaController.findAllByPJUD(id);
         for (ProcessoJudicialHistorico pjh : processoJudicialHistoricoList) {
             if (pjh.getExecutado().equals("PF")) {
-                PessoaFisica pessoaFisica = PessoaFisicaBO.findPessoaFisica(pjh.getExecutadoFk());
-                enderecoPessoa = new EnderecoPessoa(pessoaFisica, EnderecoBO.findPFAddress(pessoaFisica.getId()), BemBO.findPFBens(pessoaFisica.getId()));
-                executadoHistorico = new ExecutadoHistorico(pjh, enderecoPessoa, null, CitacaoHistoricoBO.findByPJUD(pjh.getId()), carregarSocioRedirecionamentoHistorico(RedirecionamentoHistoricoBO.findByPJUD(pjh.getId())), PenhoraHistoricoBO.findByPJUD(pjh.getId()), AquisicaoBemHistoricoBO.findByPJUD(pjh.getId()));
+                PessoaFisica pessoaFisica = pessoaFisicaJpaController.findPessoaFisica(pjh.getExecutadoFk());
+                enderecoPessoa = new EnderecoPessoa(pessoaFisica, enderecoJpaController.findPFAddress(pessoaFisica.getId()), bemJpaController.findPFBens(pessoaFisica.getId()));
+                executadoHistorico = new ExecutadoHistorico(pjh, enderecoPessoa, null, citacaoHistoricoJpaController.findByPJUD(pjh.getId()), carregarSocioRedirecionamentoHistorico(redirecionamentoHistoricoJpaController.findByPJUD(pjh.getId())), penhoraHistoricoJpaController.findByPJUD(pjh.getId()), aquisicaoBemHistoricoJpaController.findByPJUD(pjh.getId()));
             } else if (pjh.getExecutado().equals("PJ")) {
-                PessoaJuridica pessoaJuridica = PessoaJuridicaBO.findPessoaJuridica(pjh.getExecutadoFk());
-                enderecoPessoa = new EnderecoPessoa(pessoaJuridica, EnderecoBO.findPJAddress(pessoaJuridica.getId()), BemBO.findPJBens(pessoaJuridica.getId()));
-                executadoHistorico = new ExecutadoHistorico(pjh, null, enderecoPessoa, CitacaoHistoricoBO.findByPJUD(pjh.getId()), carregarSocioRedirecionamentoHistorico(RedirecionamentoHistoricoBO.findByPJUD(pjh.getId())), PenhoraHistoricoBO.findByPJUD(pjh.getId()), AquisicaoBemHistoricoBO.findByPJUD(pjh.getId()));
+                PessoaJuridica pessoaJuridica = pessoaJuridicaJpaController.findPessoaJuridica(pjh.getExecutadoFk());
+                enderecoPessoa = new EnderecoPessoa(pessoaJuridica, enderecoJpaController.findPJAddress(pessoaJuridica.getId()), bemJpaController.findPJBens(pessoaJuridica.getId()));
+                executadoHistorico = new ExecutadoHistorico(pjh, null, enderecoPessoa, citacaoHistoricoJpaController.findByPJUD(pjh.getId()), carregarSocioRedirecionamentoHistorico(redirecionamentoHistoricoJpaController.findByPJUD(pjh.getId())), penhoraHistoricoJpaController.findByPJUD(pjh.getId()), aquisicaoBemHistoricoJpaController.findByPJUD(pjh.getId()));
             }
             executadoHistoricoList.add(executadoHistorico);
         }
@@ -301,10 +321,10 @@ public class ProcessoJudicialBean implements Serializable {
     }
 
     private void carregarFormulario() { // Carregar listas do formulário
-        tipoDeRecursoList = TipoRecursoBO.findAll();
-        tipoDoProcessoList = TipoProcessoBO.findAll();
-        situacaoList = SituacaoBO.findAll();
-        procuradorList = ProcuradorBO.findAll();
+        tipoDeRecursoList = new TipoRecursoJpaController().findTipoRecursoEntities();
+        tipoDoProcessoList = new TipoProcessoJpaController().findTipoProcessoEntities();
+        situacaoList = new SituacaoJpaController().findSituacaoEntities();
+        procuradorList = new ProcuradorJpaController().findProcuradorEntities();
     }
 
     public void adicionarVinculosProcessuais() {
@@ -369,18 +389,18 @@ public class ProcessoJudicialBean implements Serializable {
     public void refreshListaDeBens(Integer index) {
         if (index == null) {
             if (executadoPJ != null) {
-                bemList = BemBO.findPJBens(Integer.valueOf(executadoPJ));
+                bemList = bemJpaController.findPJBens(Integer.valueOf(executadoPJ));
             } else if (executadoPF != null) {
-                bemList = BemBO.findPFBens(Integer.valueOf(executadoPF));
+                bemList = bemJpaController.findPFBens(Integer.valueOf(executadoPF));
             }
             for (Penhora penhora : penhoraList) {
                 if (penhora.getSocioTipo() != null) {
                     String tabela = penhora.getSocioTipo().substring(0, 2);
                     Integer id = Integer.valueOf(penhora.getSocioTipo().substring(2));
                     if (tabela.equals("PF")) {
-                        penhora.setBemList(BemBO.findPFBens(id));
+                        penhora.setBemList(bemJpaController.findPFBens(id));
                     } else if (tabela.equals("PJ")) {
-                        penhora.setBemList(BemBO.findPJBens(id));
+                        penhora.setBemList(bemJpaController.findPJBens(id));
                     }
                 }
             }
@@ -389,9 +409,9 @@ public class ProcessoJudicialBean implements Serializable {
                 String tabela = penhoraList.get(index).getSocioTipo().substring(0, 2);
                 Integer id = Integer.valueOf(penhoraList.get(index).getSocioTipo().substring(2));
                 if (tabela.equals("PF")) {
-                    penhoraList.get(index).setBemList(BemBO.findPFBens(id));
+                    penhoraList.get(index).setBemList(bemJpaController.findPFBens(id));
                 } else if (tabela.equals("PJ")) {
-                    penhoraList.get(index).setBemList(BemBO.findPJBens(id));
+                    penhoraList.get(index).setBemList(bemJpaController.findPJBens(id));
                 }
             }
         }
@@ -443,16 +463,14 @@ public class ProcessoJudicialBean implements Serializable {
     }
 
     public void listarSocios(String tipo) {
-        PessoaFisicaJuridicaBO pfjBO = new PessoaFisicaJuridicaBO();
-        PessoaJuridicaJuridicaBO pjjBO = new PessoaJuridicaJuridicaBO();
         socioList = new ArrayList<>();
         if (!initialLoad) {
             socioRedirecionamentoList = new ArrayList<>();
             oldSocioRedirecionamentoList = new ArrayList<>();
         }
         if (tipo.equals("PJ") && executadoPJ != null) {
-            bemList = BemBO.findPJBens(Integer.valueOf(executadoPJ));
-            List<PessoaFisicaJuridica> pfjList = pfjBO.findAllByPJ(Integer.valueOf(executadoPJ));
+            bemList = bemJpaController.findPJBens(Integer.valueOf(executadoPJ));
+            List<PessoaFisicaJuridica> pfjList = new PessoaFisicaJuridicaJpaController().findAllByPJ(Integer.valueOf(executadoPJ));
             for (PessoaFisicaJuridica pfj : pfjList) {
                 socioList.add(pfj.getPessoaFisicaFk());
                 if (!initialLoad) {
@@ -462,7 +480,7 @@ public class ProcessoJudicialBean implements Serializable {
                     oldSocioRedirecionamentoList.add(oldSocioRedirecionamento);
                 }
             }
-            List<PessoaJuridicaJuridica> pjjList = pjjBO.findAllByPJAOrPJB(Integer.valueOf(executadoPJ));
+            List<PessoaJuridicaJuridica> pjjList = new PessoaJuridicaJuridicaJpaController().findAllByPJAOrPJB(Integer.valueOf(executadoPJ));
             for (PessoaJuridicaJuridica pjj : pjjList) {
                 if (pjj.getPessoaJuridicaPrimariaFk().getId().equals(Integer.valueOf(executadoPJ))) {
                     socioList.add(pjj.getPessoaJuridicaSecundariaFk());
@@ -475,12 +493,12 @@ public class ProcessoJudicialBean implements Serializable {
                 }
             }
         } else if (tipo.equals("PF") && executadoPF != null) {
-            bemList = BemBO.findPFBens(Integer.valueOf(executadoPF));
+            bemList = bemJpaController.findPFBens(Integer.valueOf(executadoPF));
             enderecosSocios = 0;
             enderecoSocioList = new ArrayList<>();
         }
         if (edit) {
-            penhoraList = PenhoraBO.findByPJUD(processoJudicial.getId());
+            penhoraList = penhoraJpaController.findByPJUD(processoJudicial.getId());
             for (Penhora penhora : penhoraList) {
                 if (penhora.getSocio() != null && penhora.getSocioFk() != null) {
                     penhora.setSocioTipo(penhora.getSocio() + penhora.getSocioFk());
@@ -488,10 +506,10 @@ public class ProcessoJudicialBean implements Serializable {
             }
         }
         if (!socioList.isEmpty()) {
-            tipoPenhoraList = TipoPenhoraBO.findAll();
+            tipoPenhoraList = tipoPenhora1JpaController.findTipoPenhoraEntities();
         } else {
             redirecionamento = null;
-            tipoPenhoraList = TipoPenhoraBO.findPenhorasSemSocio();
+            tipoPenhoraList = tipoPenhora1JpaController.findPenhorasSemSocio();
             Iterator<Penhora> i = penhoraList.iterator();
             while (i.hasNext()) {
                 Penhora penhora = i.next();
@@ -505,30 +523,30 @@ public class ProcessoJudicialBean implements Serializable {
 
     public void exibirExecutado() {
         if (processoJudicial.getExecutado().equals("PF")) {
-            PessoaFisica pessoaFisica = PessoaFisicaBO.findPessoaFisica(Integer.valueOf(executadoPF));
-            enderecoPessoaFisica = new EnderecoPessoa(pessoaFisica, EnderecoBO.findPFAddress(pessoaFisica.getId()), BemBO.findPFBens(pessoaFisica.getId()));
-            executadoProcessoJudicialList = ProcessoJudicialBO.findByExecutado(executadoPF, "PF");
+            PessoaFisica pessoaFisica = pessoaFisicaJpaController.findPessoaFisica(Integer.valueOf(executadoPF));
+            enderecoPessoaFisica = new EnderecoPessoa(pessoaFisica, enderecoJpaController.findPFAddress(pessoaFisica.getId()), bemJpaController.findPFBens(pessoaFisica.getId()));
+            executadoProcessoJudicialList = processoJudicialJpaController.findByExecutado(executadoPF, "PF");
         } else if (processoJudicial.getExecutado().equals("PJ")) {
-            PessoaJuridica pessoaJuridica = PessoaJuridicaBO.findPessoaJuridica(Integer.valueOf(executadoPJ));
-            enderecoPessoaJuridica = new EnderecoPessoa(pessoaJuridica, EnderecoBO.findPJAddress(pessoaJuridica.getId()), BemBO.findPJBens(pessoaJuridica.getId()));
-            executadoProcessoJudicialList = ProcessoJudicialBO.findByExecutado(executadoPJ, "PJ");
+            PessoaJuridica pessoaJuridica = pessoaJuridicaJpaController.findPessoaJuridica(Integer.valueOf(executadoPJ));
+            enderecoPessoaJuridica = new EnderecoPessoa(pessoaJuridica, enderecoJpaController.findPJAddress(pessoaJuridica.getId()), bemJpaController.findPJBens(pessoaJuridica.getId()));
+            executadoProcessoJudicialList = processoJudicialJpaController.findByExecutado(executadoPJ, "PJ");
         }
     }
 
     public void exibirInfo() {
-        processoJudicial = ProcessoJudicialBO.findProcessoJudicial(Integer.valueOf(pjudId));
+        processoJudicial = processoJudicialJpaController.findProcessoJudicial(Integer.valueOf(pjudId));
         for (VinculoProcessual vp : processoJudicial.getVinculoProcessualCollection()) {
-            ProcessoJudicial processoJudicialVinculado = ProcessoJudicialBO.findByProcessNumber(vp.getProcesso());
+            ProcessoJudicial processoJudicialVinculado = processoJudicialJpaController.findByProcessNumber(vp.getProcesso());
             vp.setProcessoJudicialTransientId((processoJudicialVinculado != null) ? processoJudicialVinculado.getId() : null);
         }
         if (processoJudicial.getExecutado().equals("PF")) {
-            PessoaFisica pessoaFisica = PessoaFisicaBO.findPessoaFisica(processoJudicial.getExecutadoFk());
-            enderecoPessoaFisica = new EnderecoPessoa(pessoaFisica, EnderecoBO.findPFAddress(pessoaFisica.getId()), BemBO.findPFBens(pessoaFisica.getId()));
-            executado = new Executado(processoJudicial, enderecoPessoaFisica, CitacaoBO.findByPJUD(processoJudicial.getId()), carregarSocioRedirecionamento(RedirecionamentoBO.findByPJUD(processoJudicial.getId())), PenhoraBO.findByPJUD(processoJudicial.getId()), AquisicaoBemBO.findByPJUD(processoJudicial.getId()));
+            PessoaFisica pessoaFisica = pessoaFisicaJpaController.findPessoaFisica(processoJudicial.getExecutadoFk());
+            enderecoPessoaFisica = new EnderecoPessoa(pessoaFisica, enderecoJpaController.findPFAddress(pessoaFisica.getId()), bemJpaController.findPFBens(pessoaFisica.getId()));
+            executado = new Executado(processoJudicial, enderecoPessoaFisica, citacaoJpaController.findByPJUD(processoJudicial.getId()), carregarSocioRedirecionamento(redirecionamentoJpaController.findByPJUD(processoJudicial.getId())), penhoraJpaController.findByPJUD(processoJudicial.getId()), aquisicaoBemJpaController.findByPJUD(processoJudicial.getId()));
         } else {
-            PessoaJuridica pessoaJuridica = PessoaJuridicaBO.findPessoaJuridica(processoJudicial.getExecutadoFk());
-            enderecoPessoaJuridica = new EnderecoPessoa(pessoaJuridica, EnderecoBO.findPJAddress(pessoaJuridica.getId()), BemBO.findPJBens(pessoaJuridica.getId()));
-            executado = new Executado(processoJudicial, enderecoPessoaJuridica, CitacaoBO.findByPJUD(processoJudicial.getId()), carregarSocioRedirecionamento(RedirecionamentoBO.findByPJUD(processoJudicial.getId())), PenhoraBO.findByPJUD(processoJudicial.getId()), AquisicaoBemBO.findByPJUD(processoJudicial.getId()));
+            PessoaJuridica pessoaJuridica = pessoaJuridicaJpaController.findPessoaJuridica(processoJudicial.getExecutadoFk());
+            enderecoPessoaJuridica = new EnderecoPessoa(pessoaJuridica, enderecoJpaController.findPJAddress(pessoaJuridica.getId()), bemJpaController.findPJBens(pessoaJuridica.getId()));
+            executado = new Executado(processoJudicial, enderecoPessoaJuridica, citacaoJpaController.findByPJUD(processoJudicial.getId()), carregarSocioRedirecionamento(redirecionamentoJpaController.findByPJUD(processoJudicial.getId())), penhoraJpaController.findByPJUD(processoJudicial.getId()), aquisicaoBemJpaController.findByPJUD(processoJudicial.getId()));
         }
     }
 
@@ -552,9 +570,9 @@ public class ProcessoJudicialBean implements Serializable {
         for (Redirecionamento redirecionamento : redirecionamentoList) {
             this.redirecionamento = redirecionamento.getRedirecionado();
             if (redirecionamento.getSocio().equals("PF")) {
-                socioRedirecionamentoList.add(new SocioRedirecionamento(PessoaFisicaBO.findPessoaFisica(redirecionamento.getSocioFk()), redirecionamento));
+                socioRedirecionamentoList.add(new SocioRedirecionamento(pessoaFisicaJpaController.findPessoaFisica(redirecionamento.getSocioFk()), redirecionamento));
             } else {
-                socioRedirecionamentoList.add(new SocioRedirecionamento(PessoaJuridicaBO.findPessoaJuridica(redirecionamento.getSocioFk()), redirecionamento));
+                socioRedirecionamentoList.add(new SocioRedirecionamento(pessoaJuridicaJpaController.findPessoaJuridica(redirecionamento.getSocioFk()), redirecionamento));
             }
         }
         return socioRedirecionamentoList;
@@ -564,18 +582,18 @@ public class ProcessoJudicialBean implements Serializable {
         List<SocioRedirecionamentoHistorico> socioRedirecionamentoHistoricoList = new ArrayList<>();
         for (RedirecionamentoHistorico redirecionamentoHistorico : redirecionamentoHistoricoList) {
             if (redirecionamentoHistorico.getSocio().equals("PF")) {
-                socioRedirecionamentoHistoricoList.add(new SocioRedirecionamentoHistorico(PessoaFisicaBO.findPessoaFisica(redirecionamentoHistorico.getSocioFk()), redirecionamentoHistorico));
+                socioRedirecionamentoHistoricoList.add(new SocioRedirecionamentoHistorico(pessoaFisicaJpaController.findPessoaFisica(redirecionamentoHistorico.getSocioFk()), redirecionamentoHistorico));
             } else {
-                socioRedirecionamentoHistoricoList.add(new SocioRedirecionamentoHistorico(PessoaJuridicaBO.findPessoaJuridica(redirecionamentoHistorico.getSocioFk()), redirecionamentoHistorico));
+                socioRedirecionamentoHistoricoList.add(new SocioRedirecionamentoHistorico(pessoaJuridicaJpaController.findPessoaJuridica(redirecionamentoHistorico.getSocioFk()), redirecionamentoHistorico));
             }
         }
         return socioRedirecionamentoHistoricoList;
     }
 
-    public void removerProcessoJudicial() {
-        processoJudicial = ProcessoJudicialBO.findProcessoJudicial(Integer.valueOf(pjudId));
+    public void removerProcessoJudicial() throws Exception {
+        processoJudicial = processoJudicialJpaController.findProcessoJudicial(Integer.valueOf(pjudId));
         processoJudicial.setStatus('I');
-        ProcessoJudicialBO.edit(processoJudicial);
+        processoJudicialJpaController.edit(processoJudicial);
         GeradorLog.criar(processoJudicial.getId(), "PJUD", 'D');
         redirect = "";
         register = "success";
@@ -586,10 +604,10 @@ public class ProcessoJudicialBean implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().redirect("cadastrar.xhtml");
     }
 
-    public void cadastrar() throws IOException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public void cadastrar() throws IOException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, Exception {
         boolean error = false;
-        ProcessoJudicial pjudDBCDA = ProcessoJudicialBO.findByCDA(processoJudicial);
-        ProcessoJudicial pjudDBProcess = ProcessoJudicialBO.findByProcessNumber(processoJudicial.getNumeroDoProcesso());
+        ProcessoJudicial pjudDBCDA = processoJudicialJpaController.findByCDA(processoJudicial);
+        ProcessoJudicial pjudDBProcess = processoJudicialJpaController.findByProcessNumber(processoJudicial.getNumeroDoProcesso());
         processoJudicial.setExecutadoFk(executadoPF != null ? Integer.valueOf(executadoPF) : Integer.valueOf(executadoPJ));
         List<Citacao> citacaoList = new ArrayList<>();
         citacaoList.addAll(arList);
@@ -601,16 +619,16 @@ public class ProcessoJudicialBean implements Serializable {
              Cadastrar novo Processo Judicial
              */
             if (pjudDBCDA == null && pjudDBProcess == null) { // Processo novo
-                processoJudicial.setUsuarioFk(UsuarioBO.findUsuarioByCPF(Cookie.getCookie("usuario")));
-                processoJudicial.setInstituicaoFk(UsuarioBO.findAutorizacaoByCPF(Cookie.getCookie("usuario")).getInstituicaoFk());
+                processoJudicial.setUsuarioFk(usuarioJpaController.findUsuarioByCPF(Cookie.getCookie("usuario")));
+                processoJudicial.setInstituicaoFk(new AutorizacaoJpaController().findAutorizacaoByCPF(Cookie.getCookie("usuario")).getInstituicaoFk());
                 processoJudicial.setStatus('A');
                 if (processoJudicial.getValorAtualizado() == null && processoJudicial.getValorDaCausa() != null) {
                     processoJudicial.setValorAtualizado(processoJudicial.getValorDaCausa());
                 }
-                ProcessoJudicialBO.create(processoJudicial);
+                processoJudicialJpaController.create(processoJudicial);
                 for (VinculoProcessual vinculoProcessual : vinculoProcessualList) {
                     vinculoProcessual.setProcessoJudicialFk(processoJudicial);
-                    VinculoProcessualBO.create(vinculoProcessual);
+                    vinculoProcessualJpaController.create(vinculoProcessual);
                 }
                 for (Citacao c : citacaoList) {
                     if (c.getSocioTipo() != null) {
@@ -618,7 +636,7 @@ public class ProcessoJudicialBean implements Serializable {
                         c.setSocioFk(Integer.valueOf(c.getSocioTipo().substring(2)));
                     }
                     c.setProcessoJudicialFk(processoJudicial);
-                    CitacaoBO.create(c);
+                    citacaoJpaController.create(c);
                 }
                 for (SocioRedirecionamento sr : socioRedirecionamentoList) {
                     if (redirecionamento != null) {
@@ -633,7 +651,7 @@ public class ProcessoJudicialBean implements Serializable {
                             sr.getRedirecionamento().setSocioFk(pessoaJuridica.getId());
                             sr.getRedirecionamento().setSocio("PJ");
                         }
-                        RedirecionamentoBO.create(sr.getRedirecionamento());
+                        redirecionamentoJpaController.create(sr.getRedirecionamento());
                     }
                 }
                 for (Penhora penhora : penhoraList) {
@@ -642,12 +660,12 @@ public class ProcessoJudicialBean implements Serializable {
                         penhora.setSocio(penhora.getSocioTipo().substring(0, 2));
                     }
                     penhora.setProcessoJudicialFk(processoJudicial);
-                    PenhoraBO.create(penhora);
+                    penhoraJpaController.create(penhora);
                 }
                 for (List<AquisicaoBem> aquisicaoBemList : listOfAquisicaoBemList) {
                     for (AquisicaoBem aquisicaoBem : aquisicaoBemList) {
                         aquisicaoBem.setProcessoJudicialFk(processoJudicial);
-                        AquisicaoBemBO.create(aquisicaoBem);
+                        aquisicaoBemJpaController.create(aquisicaoBem);
                     }
                 }
                 register = "success";
@@ -698,30 +716,29 @@ public class ProcessoJudicialBean implements Serializable {
                     Cookie.addCookie("FacesMessage", "fail", 10);
                     FacesContext.getCurrentInstance().getExternalContext().redirect("consultar.xhtml");
                 } else {
-                    UtilBO utilBO = new UtilBO();
-                    Timestamp timestamp = utilBO.findServerTime();
-                    processoJudicial.setUsuarioFk(UsuarioBO.findUsuarioByCPF(Cookie.getCookie("usuario")));
+                    Timestamp timestamp = new UtilJpaController().findServerTime();
+                    processoJudicial.setUsuarioFk(usuarioJpaController.findUsuarioByCPF(Cookie.getCookie("usuario")));
                     if (processoJudicial.getValorAtualizado() == null && processoJudicial.getValorDaCausa() != null) {
                         processoJudicial.setValorAtualizado(processoJudicial.getValorDaCausa());
                     }
-                    ProcessoJudicialBO.edit(processoJudicial);
+                    processoJudicialJpaController.edit(processoJudicial);
                     processoJudicialHistorico.setDataDeModificacao(timestamp);
-                    ProcessoJudicialHistoricoBO.create(processoJudicialHistorico);
-                    VinculoProcessualBO.destroyByPJUD(processoJudicial.getId());
+                    processoJudicialHistoricoJpaController.create(processoJudicialHistorico);
+                    vinculoProcessualJpaController.destroyByPJUD(processoJudicial.getId());
                     for (VinculoProcessual vinculoProcessual : vinculoProcessualList) {
                         vinculoProcessual.setProcessoJudicialFk(processoJudicial);
-                        VinculoProcessualBO.create(vinculoProcessual);
+                        vinculoProcessualJpaController.create(vinculoProcessual);
                     }
-                    CitacaoBO.destroyByPJUD(processoJudicial.getId());
+                    citacaoJpaController.destroyByPJUD(processoJudicial.getId());
                     for (Citacao citacao : citacaoList) {
                         if (citacao.getSocioTipo() != null) {
                             citacao.setSocio(citacao.getSocioTipo().substring(0, 2));
                             citacao.setSocioFk(Integer.valueOf(citacao.getSocioTipo().substring(2)));
                         }
                         citacao.setProcessoJudicialFk(processoJudicial);
-                        CitacaoBO.create(citacao);
+                        citacaoJpaController.create(citacao);
                     }
-                    RedirecionamentoBO.destroyByPJUD(processoJudicial.getId());
+                    redirecionamentoJpaController.destroyByPJUD(processoJudicial.getId());
                     for (SocioRedirecionamento sr : socioRedirecionamentoList) {
                         if (redirecionamento != null) {
                             sr.getRedirecionamento().setProcessoJudicialFk(processoJudicial);
@@ -734,37 +751,37 @@ public class ProcessoJudicialBean implements Serializable {
                                 sr.getRedirecionamento().setSocioFk(pessoaJuridica.getId());
                                 sr.getRedirecionamento().setSocio("PJ");
                             }
-                            RedirecionamentoBO.create(sr.getRedirecionamento());
+                            redirecionamentoJpaController.create(sr.getRedirecionamento());
                         }
                     }
-                    PenhoraBO.destroyByPJUD(processoJudicial.getId());
+                    penhoraJpaController.destroyByPJUD(processoJudicial.getId());
                     for (Penhora penhora : penhoraList) {
-                        PenhoraBO.create(penhora);
+                        penhoraJpaController.create(penhora);
                     }
-                    AquisicaoBemBO.destroyByPJUD(processoJudicial.getId());
+                    aquisicaoBemJpaController.destroyByPJUD(processoJudicial.getId());
                     for (AquisicaoBem aquisicaoBem : aquisicaoBemListTemp) {
-                        AquisicaoBemBO.create(aquisicaoBem);
+                        aquisicaoBemJpaController.create(aquisicaoBem);
                     }
 
                     for (AquisicaoBemHistorico abh : aquisicaoBemHistoricoList) {
                         abh.setProcessoJudicialHistoricoFk(processoJudicialHistorico);
-                        AquisicaoBemHistoricoBO.create(abh);
+                        aquisicaoBemHistoricoJpaController.create(abh);
                     }
                     for (VinculoProcessualHistorico vph : vinculoProcessualHistoricoList) {
                         vph.setProcessoJudicialHistoricoFk(processoJudicialHistorico);
-                        VinculoProcessualHistoricoBO.create(vph);
+                        new VinculoProcessualHistoricoJpaController().create(vph);
                     }
                     for (CitacaoHistorico ch : citacaoHistoricoList) {
                         ch.setProcessoJudicialHistoricoFk(processoJudicialHistorico);
-                        CitacaoHistoricoBO.create(ch);
+                        citacaoHistoricoJpaController.create(ch);
                     }
                     for (RedirecionamentoHistorico rh : redirecionamentoHistoricoList) {
                         rh.setProcessoJudicialHistoricoFk(processoJudicialHistorico);
-                        RedirecionamentoHistoricoBO.create(rh);
+                        redirecionamentoHistoricoJpaController.create(rh);
                     }
                     for (PenhoraHistorico ph : penhoraHistoricoList) {
                         ph.setProcessoJudicialHistoricoFk(processoJudicialHistorico);
-                        PenhoraHistoricoBO.create(ph);
+                        penhoraHistoricoJpaController.create(ph);
                     }
                     GeradorLog.criar(processoJudicial.getId(), "PJUD", 'U');
                     Cookie.addCookie("FacesMessage", "success", 10);
@@ -798,11 +815,11 @@ public class ProcessoJudicialBean implements Serializable {
     private String prepararMensagemDeErro(ProcessoJudicial processoJudicial) {
         String mensagem = "\nComarca: " + processoJudicial.getComarca();
         if (processoJudicial.getExecutado().equals("PF")) {
-            PessoaFisica pf = PessoaFisicaBO.findPessoaFisica(processoJudicial.getExecutadoFk());
+            PessoaFisica pf = pessoaFisicaJpaController.findPessoaFisica(processoJudicial.getExecutadoFk());
             mensagem += "\nExecutado: " + pf.getNome();
             mensagem += "\nCPF: " + (pf.getCpf() != null ? pf.getCpf().substring(0, 3) + "." + pf.getCpf().substring(3, 6) + "." + pf.getCpf().substring(6, 9) + "-" + pf.getCpf().substring(9) : "-");
         } else {
-            PessoaJuridica pj = PessoaJuridicaBO.findPessoaJuridica(processoJudicial.getExecutadoFk());
+            PessoaJuridica pj = pessoaJuridicaJpaController.findPessoaJuridica(processoJudicial.getExecutadoFk());
             mensagem += "\nExecutado: " + pj.getNome();
             mensagem += "\nCNPJ: " + pj.getCnpj().substring(0, 3) + "." + pj.getCnpj().substring(3, 6) + "." + pj.getCnpj().substring(6, 9) + "/" + pj.getCnpj().substring(9, 13) + "-" + pj.getCnpj().substring(13);
         }
@@ -811,7 +828,7 @@ public class ProcessoJudicialBean implements Serializable {
 
     public void prepararHistorico(ProcessoJudicial processoJudicial, List<Citacao> citacaoList, List<SocioRedirecionamento> socioRedirecionamentoList, List<Penhora> penhoraList, List<AquisicaoBem> aquisicaoBemList) {
         /*
-         Montar entidades dos históricos de alteração 
+         Montar com.ppcc.app.model.entitys dos históricos de alteração 
          */
         processoJudicialHistorico = new ProcessoJudicialHistorico();
         vinculoProcessualHistoricoList = new ArrayList<>();
@@ -910,7 +927,7 @@ public class ProcessoJudicialBean implements Serializable {
 
     private ExecutadoHistorico prepararRegistroAtual(ProcessoJudicial processoJudicial, EnderecoPessoa enderecoPessoa, List<Citacao> citacaoList, List<SocioRedirecionamento> socioRedirecionamentoList, List<Penhora> penhoraList, List<AquisicaoBem> aquisicaoBemList) {
         /*
-         Montar registro atual como uma entidade de histórico para facilitar o ui:repeat do form
+         Montar registro atual como uma com.ppcc.app.model.entity de histórico para facilitar o ui:repeat do form
          */
         ExecutadoHistorico executadoHistorico = new ExecutadoHistorico();
         processoJudicialHistorico = new ProcessoJudicialHistorico();

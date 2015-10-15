@@ -6,10 +6,9 @@
 
 package com.ppcc.app.model.jpa.controller;
 
-import bo.UsuarioBO;
-import dao.exceptions.IllegalOrphanException;
-import dao.exceptions.NonexistentEntityException;
-import dao.exceptions.RollbackFailureException;
+import com.ppcc.app.model.jpa.controller.exception.IllegalOrphanException;
+import com.ppcc.app.model.jpa.controller.exception.NonexistentEntityException;
+import com.ppcc.app.model.jpa.controller.exception.RollbackFailureException;
 import com.ppcc.app.model.entity.Instituicao;
 import com.ppcc.app.model.entity.PessoaFisicaJuridica;
 import com.ppcc.app.model.entity.PessoaFisicaJuridicaHistorico;
@@ -34,7 +33,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
-import util.Cookie;
+import com.ppcc.app.util.Cookie;
 
 /**
  *

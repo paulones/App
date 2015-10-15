@@ -5,14 +5,15 @@
  */
 package com.ppcc.app.controller.bean;
 
-import bo.PessoaJuridicaBO;
-import bo.PessoaJuridicaSucessaoBO;
-import bo.PessoaJuridicaSucessaoHistoricoBO;
-import bo.UsuarioBO;
-import bo.UtilBO;
-import entidade.PessoaJuridica;
-import entidade.PessoaJuridicaSucessao;
-import entidade.PessoaJuridicaSucessaoHistorico;
+import com.ppcc.app.model.entity.PessoaJuridica;
+import com.ppcc.app.model.entity.PessoaJuridicaSucessao;
+import com.ppcc.app.model.entity.PessoaJuridicaSucessaoHistorico;
+import com.ppcc.app.model.entity.Usuario;
+import com.ppcc.app.model.jpa.controller.PessoaJuridicaJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaJuridicaSucessaoHistoricoJpaController;
+import com.ppcc.app.model.jpa.controller.PessoaJuridicaSucessaoJpaController;
+import com.ppcc.app.model.jpa.controller.UsuarioJpaController;
+import com.ppcc.app.model.jpa.controller.UtilJpaController;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,8 +24,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-import util.Cookie;
-import util.GeradorLog;
+import com.ppcc.app.util.Cookie;
+import com.ppcc.app.util.GeradorLog;
 
 /**
  *
@@ -38,6 +39,9 @@ public class sucessaoBean implements Serializable {
     private String sucedida;
     private String sucessora;
     private String dataDeSucessao;
+    
+    private PessoaJuridicaJpaController pessoaJuridicaJpaController = new PessoaJuridicaJpaController();
+    private PessoaJuridicaSucessaoJpaController pessoaJuridicaSucessaoJpaController = new PessoaJuridicaSucessaoJpaController();
 
     private PessoaJuridicaSucessao pessoaJuridicaSucessao;
     private PessoaJuridicaSucessaoHistorico pessoaJuridicaSucessaoHistorico;
@@ -54,29 +58,28 @@ public class sucessaoBean implements Serializable {
         }
     }
 
-    public void suceder() {
+    public void suceder() throws Exception {
         if (!sucedida.equals(sucessora)) {
-            PessoaJuridica pjSucedida = PessoaJuridicaBO.findPessoaJuridica(Integer.valueOf(sucedida));
-            PessoaJuridica pjSucessora = PessoaJuridicaBO.findPessoaJuridica(Integer.valueOf(sucessora));
-            UtilBO utilBO = new UtilBO();
+            PessoaJuridica pjSucedida = pessoaJuridicaJpaController.findPessoaJuridica(Integer.valueOf(sucedida));
+            PessoaJuridica pjSucessora = pessoaJuridicaJpaController.findPessoaJuridica(Integer.valueOf(sucessora));
             boolean exists = true;
-            pessoaJuridicaSucessao = PessoaJuridicaSucessaoBO.findDuplicates(pjSucedida, pjSucessora);
+            pessoaJuridicaSucessao = pessoaJuridicaSucessaoJpaController.findDuplicates(pjSucedida, pjSucessora);
             if (pessoaJuridicaSucessao == null) {
                 pessoaJuridicaSucessao = new PessoaJuridicaSucessao();
                 exists = false;
             } else {
                 prepararHistorico(pessoaJuridicaSucessao);
             }
-            pessoaJuridicaSucessao.setUsuarioFk(UsuarioBO.findUsuarioByCPF(Cookie.getCookie("usuario")));
+            pessoaJuridicaSucessao.setUsuarioFk(new UsuarioJpaController().findUsuarioByCPF(Cookie.getCookie("usuario")));
             pessoaJuridicaSucessao.setPessoaJuridicaSucedidaFk(pjSucedida);
             pessoaJuridicaSucessao.setPessoaJuridicaSucessoraFk(pjSucessora);
             pessoaJuridicaSucessao.setDataDeSucessao(dataDeSucessao);
             pessoaJuridicaSucessao.setStatus('A');
             if (exists) {
-                if (!pessoaJuridicaSucessao.equalsValues(PessoaJuridicaSucessaoBO.findDuplicates(pjSucedida, pjSucessora))) {
-                    PessoaJuridicaSucessaoBO.edit(pessoaJuridicaSucessao);
-                    pessoaJuridicaSucessaoHistorico.setDataDeModificacao(utilBO.findServerTime());
-                    PessoaJuridicaSucessaoHistoricoBO.create(pessoaJuridicaSucessaoHistorico);
+                if (!pessoaJuridicaSucessao.equalsValues(pessoaJuridicaSucessaoJpaController.findDuplicates(pjSucedida, pjSucessora))) {
+                    pessoaJuridicaSucessaoJpaController.edit(pessoaJuridicaSucessao);
+                    pessoaJuridicaSucessaoHistorico.setDataDeModificacao(new UtilJpaController().findServerTime());
+                    new PessoaJuridicaSucessaoHistoricoJpaController().create(pessoaJuridicaSucessaoHistorico);
                     GeradorLog.criar(pessoaJuridicaSucessao.getId(), "PJS", 'U');
                     succeed = "success";
                     sucedida = "";
@@ -88,7 +91,7 @@ public class sucessaoBean implements Serializable {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nenhum campo foi alterado.", null));
                 }
             } else {
-                PessoaJuridicaSucessaoBO.create(pessoaJuridicaSucessao);
+                pessoaJuridicaSucessaoJpaController.create(pessoaJuridicaSucessao);
                 GeradorLog.criar(pessoaJuridicaSucessao.getId(), "PJS", 'C');
                 succeed = "success";
                 sucedida = "";
@@ -105,9 +108,9 @@ public class sucessaoBean implements Serializable {
     public void checkSucessoes() {
         if (sucedida != null && sucessora != null) {
             if (!sucedida.equals(sucessora)) {
-                PessoaJuridica pjSucedida = PessoaJuridicaBO.findPessoaJuridica(Integer.valueOf(sucedida));
-                PessoaJuridica pjSucessora = PessoaJuridicaBO.findPessoaJuridica(Integer.valueOf(sucessora));
-                pessoaJuridicaSucessao = PessoaJuridicaSucessaoBO.findDuplicates(pjSucedida, pjSucessora);
+                PessoaJuridica pjSucedida = pessoaJuridicaJpaController.findPessoaJuridica(Integer.valueOf(sucedida));
+                PessoaJuridica pjSucessora = pessoaJuridicaJpaController.findPessoaJuridica(Integer.valueOf(sucessora));
+                pessoaJuridicaSucessao = pessoaJuridicaSucessaoJpaController.findDuplicates(pjSucedida, pjSucessora);
                 if (pessoaJuridicaSucessao != null) {
                     if (pessoaJuridicaSucessao.getStatus().equals('I')) {
                         succeed = "warning";

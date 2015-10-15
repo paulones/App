@@ -7,8 +7,8 @@
 package com.ppcc.app.model.jpa.controller;
 
 import com.ppcc.app.model.jpa.util.JPAUtil;
-import dao.exceptions.NonexistentEntityException;
-import dao.exceptions.RollbackFailureException;
+import com.ppcc.app.model.jpa.controller.exception.NonexistentEntityException;
+import com.ppcc.app.model.jpa.controller.exception.RollbackFailureException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;

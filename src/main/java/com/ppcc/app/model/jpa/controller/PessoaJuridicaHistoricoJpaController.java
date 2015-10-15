@@ -6,9 +6,9 @@
 
 package com.ppcc.app.model.jpa.controller;
 
-import dao.exceptions.IllegalOrphanException;
-import dao.exceptions.NonexistentEntityException;
-import dao.exceptions.RollbackFailureException;
+import com.ppcc.app.model.jpa.controller.exception.IllegalOrphanException;
+import com.ppcc.app.model.jpa.controller.exception.NonexistentEntityException;
+import com.ppcc.app.model.jpa.controller.exception.RollbackFailureException;
 import com.ppcc.app.model.entity.PessoaJuridica;
 import com.ppcc.app.model.entity.PessoaJuridicaHistorico;
 import com.ppcc.app.model.entity.PessoaJuridicaJuridicaHistorico;

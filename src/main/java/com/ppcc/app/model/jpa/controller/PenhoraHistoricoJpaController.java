@@ -6,8 +6,8 @@
 
 package com.ppcc.app.model.jpa.controller;
 
-import dao.exceptions.NonexistentEntityException;
-import dao.exceptions.RollbackFailureException;
+import com.ppcc.app.model.jpa.controller.exception.NonexistentEntityException;
+import com.ppcc.app.model.jpa.controller.exception.RollbackFailureException;
 import com.ppcc.app.model.entity.Bem;
 import com.ppcc.app.model.entity.PenhoraHistorico;
 import com.ppcc.app.model.entity.ProcessoJudicialHistorico;
