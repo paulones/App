@@ -9,20 +9,17 @@ import com.ppcc.app.model.entity.Usuario;
 import com.ppcc.app.model.jpa.controller.UsuarioJpaController;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Date;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 import com.ppcc.app.util.Cookie;
-import com.ppcc.app.util.GeradorMD5;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author Paulo
  */
-@ManagedBean(name = "bloquearTelaBean")
+@Named
 @ViewScoped
 public class BloquearTelaBean implements Serializable {
 

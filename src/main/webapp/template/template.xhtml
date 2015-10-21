@@ -1,0 +1,1208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"/>
+        <title><ui:insert name="title"></ui:insert></title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <f:metadata>
+            <f:event type="preRenderComponent" listener="#{templateBean.init()}"/>
+            <f:view encoding="ISO-8859-1"/> 
+            <ui:insert name="metadata-components"/>
+        </f:metadata>
+        <!-- BEGIN PACE PLUGIN FILES -->
+        <script src="../assets/global/plugins/pace/pace.min.js" type="text/javascript"></script>
+        <link href="../assets/global/plugins/pace/themes/pace.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END PACE PLUGIN FILES -->
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css"/>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/global/plugins/uniform/css/uniform.default.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.min.css"/>
+        <link rel="stylesheet" type="text/css" href="../assets/global/plugins/jquery-nestable/jquery.nestable.css"/>
+        <ui:insert name="page-styles"></ui:insert>
+        <!-- BEGIN THEME STYLES -->
+        <link href="../assets/global/css/combined_components-plugins.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/admin/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/admin/layout/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color"/>
+        <link href="../assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="../assets/global/img/favicon.ico"/>
+        <!-- BEGIN PAULO'S STYLES -->
+        <style>
+            .modal-lg{width:980px !important}
+            .form-control-bem-static{margin-top:7px}
+            .form-control-citacao-static{margin-bottom: 0;padding-bottom: 7px;padding-top: 7px;}
+            .form-control-penhora-static{margin-bottom: 0;padding-bottom: 7px;padding-top: 7px;}
+            .form-control-aquisicao-static{margin-bottom: 0;padding-bottom: 7px;padding-top: 7px;}
+        </style>
+        <!-- END PAULO'S STYLES -->
+    </h:head>
+    <!-- BEGIN BODY -->
+    <h:body class="page-header-fixed page-sidebar-fixed page-quick-sidebar-over-content ">
+        <!-- BEGIN HEADER -->
+        <div class="page-header navbar navbar-fixed-top">
+            <!-- BEGIN HEADER INNER -->
+            <div class="page-header-inner">
+                <!-- BEGIN LOGO -->
+                <div class="page-logo">
+                    <a href="../home.xhtml">
+                        <!--<img src="../assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>-->
+                    </a>
+                    <div class="menu-toggler sidebar-toggler ">
+                        <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+                    </div>
+                </div>
+                <!-- END LOGO -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                </a>
+                <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <!-- BEGIN NOTIFICATION DROPDOWN -->
+                        <!--
+                        <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <i class="icon-bell"></i>
+                                <span class="badge badge-default">
+                                    7 </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <p>
+                                        You have 14 new notifications
+                                    </p>
+                                </li>
+                                <li>
+                                    <ul class="dropdown-menu-list scroller" style="height: 250px;">
+                                        <li>
+                                            <a href="#">
+                                                <span class="label label-sm label-icon label-success">
+                                                    <i class="fa fa-plus"></i>
+                                                </span>
+                                                New user registered. <span class="time">
+                                                    Just now </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="label label-sm label-icon label-danger">
+                                                    <i class="fa fa-bolt"></i>
+                                                </span>
+                                                Server #12 overloaded. <span class="time">
+                                                    15 mins </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="label label-sm label-icon label-warning">
+                                                    <i class="fa fa-bell-o"></i>
+                                                </span>
+                                                Server #2 not responding. <span class="time">
+                                                    22 mins </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="label label-sm label-icon label-info">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </span>
+                                                Application error. <span class="time">
+                                                    40 mins </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="label label-sm label-icon label-danger">
+                                                    <i class="fa fa-bolt"></i>
+                                                </span>
+                                                Database overloaded 68%. <span class="time">
+                                                    2 hrs </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="label label-sm label-icon label-danger">
+                                                    <i class="fa fa-bolt"></i>
+                                                </span>
+                                                2 user IP blocked. <span class="time">
+                                                    5 hrs </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="label label-sm label-icon label-warning">
+                                                    <i class="fa fa-bell-o"></i>
+                                                </span>
+                                                Storage Server #4 not responding. <span class="time">
+                                                    45 mins </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="label label-sm label-icon label-info">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </span>
+                                                System Error. <span class="time">
+                                                    55 mins </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="label label-sm label-icon label-danger">
+                                                    <i class="fa fa-bolt"></i>
+                                                </span>
+                                                Database overloaded 68%. <span class="time">
+                                                    2 hrs </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="external">
+                                    <a href="#">
+                                        See all notifications <i class="m-icon-swapright"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        -->
+                        <!-- END NOTIFICATION DROPDOWN -->
+
+                        <!-- BEGIN USER LOGIN DROPDOWN -->
+                        <li class="dropdown dropdown-user">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <img alt="" class="img-circle" src="../assets/admin/layout/img/avatar.png"/>
+                                <span class="username">
+                                    #{templateBean.usuario.nome.split(" ")[0]} </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="block-screen" href="../bloquear-tela.xhtml">
+                                        <i class="icon-lock"></i> Bloquear tela </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END USER LOGIN DROPDOWN -->
+                        <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+                        <li class="dropdown dropdown-quick-sidebar-toggler">
+                            <a href="../login.xhtml" class="logout dropdown-toggle">
+                                <i class="icon-logout"></i>
+                            </a>
+                        </li>
+                        <!-- END QUICK SIDEBAR TOGGLER -->
+                    </ul>
+                </div>
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+            <!-- END HEADER INNER -->
+        </div>
+        <!-- END HEADER -->
+        <div class="clearfix">
+        </div>
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar-wrapper">
+                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                <div class="page-sidebar navbar-collapse collapse">
+                    <!-- BEGIN SIDEBAR MENU -->
+                    <ul class="page-sidebar-menu" data-auto-scroll="true" data-slide-speed="200">
+                        <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+
+                        <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+                        <li class="sidebar-search-wrapper hidden-xs">
+                            <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                            <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+                            <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+                            <form class="sidebar-search sidebar-search-bordered sidebar-search-solid" method="POST">
+                                <a href="javascript:;" class="remove">
+                                    <i class="icon-close"></i>
+                                </a>
+                                <!--
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Procurar..."/>
+                                    <span class="input-group-btn">
+                                        <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+                                    </span>
+                                </div>
+                                -->
+                            </form>
+                            <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                        </li>
+                        <li class="start menu-home">
+                            <a href="../home.xhtml">
+                                <i class="fa fa-home"></i>
+                                <span class="title">Home</span>
+                            </a>
+                        </li>
+                        <!--
+                        <li class="menu-proc-adm">
+                            <a href="../processo-administrativo/processos-administrativos.xhtml">
+                                <i class="fa fa-briefcase"></i>
+                                <span class="title">Processo Administrativo</span>
+                            </a>
+                        </li>
+                        -->
+                        <li class="menu-pf">
+                            <a href="javascript:;">
+                                <i class="fa fa-users"></i>
+                                <span class="title">Pessoa Física</span>
+                                <span class="arrow"/>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="sub-menu-pf-cad">
+                                    <a href="../pessoa-fisica/cadastrar.xhtml">
+                                        <i class="fa fa-floppy-o"></i>
+                                        <span class="title">Cadastrar</span>
+                                    </a>
+                                </li>
+                                <li class="sub-menu-pf-con">
+                                    <a href="../pessoa-fisica/consultar.xhtml">
+                                        <i class="fa fa-search"></i>
+                                        <span class="title">Consultar/Alterar</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-pj">
+                            <a href="javascript:;">
+                                <i class="fa fa-institution"></i>
+                                <span class="title">Pessoa Jurídica</span>
+                                <span class="arrow"/>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="sub-menu-pj-cad">
+                                    <a href="../pessoa-juridica/cadastrar.xhtml">
+                                        <i class="fa fa-floppy-o"></i>
+                                        <span class="title">Cadastrar</span>
+                                    </a>
+                                </li>
+                                <li class="sub-menu-pj-con">
+                                    <a href="../pessoa-juridica/consultar.xhtml">
+                                        <i class="fa fa-search"></i>
+                                        <span class="title">Consultar/Alterar</span>
+                                    </a>
+                                </li>
+                                <li class="sub-menu-pj-suc">
+                                    <a href="../pessoa-juridica/sucessao.xhtml">
+                                        <i class="fa fa-exchange"></i>
+                                        <span class="title">Sucessão Empresarial</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="last menu-pjud">
+                            <a href="javascript:;">
+                                <i class="fa fa-gavel"></i>
+                                <span class="title">Processo Judicial</span>
+                                <span class="arrow"/>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="sub-menu-pjud-cad">
+                                    <a href="../processo-judicial/cadastrar.xhtml">
+                                        <i class="fa fa-floppy-o"></i>
+                                        <span class="title">Cadastrar</span>
+                                    </a>
+                                </li>
+                                <li class="sub-menu-pjud-con">
+                                    <a href="../processo-judicial/consultar.xhtml">
+                                        <i class="fa fa-search"></i>
+                                        <span class="title">Consultar/Alterar</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- END SIDEBAR MENU -->
+                </div>
+            </div>
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <!-- BEGIN STYLE CUSTOMIZER -->
+                    <div class="theme-panel hidden-xs hidden-sm">
+                        <div class="toggler">
+                        </div>
+                        <div class="toggler-close">
+                        </div>
+                        <div class="theme-options">
+                            <div class="theme-option theme-colors clearfix">
+                                <span>
+                                    COR DO TEMA </span>
+                                <ul>
+                                    <li class="color-default current tooltips" data-style="default" data-original-title="Padrão">
+                                    </li>
+                                    <li class="color-darkblue tooltips" data-style="darkblue" data-original-title="Azul Escuro">
+                                    </li>
+                                    <li class="color-blue tooltips" data-style="blue" data-original-title="Azul">
+                                    </li>
+                                    <li class="color-grey tooltips" data-style="grey" data-original-title="Cinza">
+                                    </li>
+                                    <li class="color-light tooltips" data-style="light" data-original-title="Claro">
+                                    </li>
+                                    <li class="color-light2 tooltips" data-style="light2" data-html="true" data-original-title="Claro 2">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="theme-option display-hide">
+                                <span>
+                                    Layout </span>
+                                <select class="layout-option form-control input-small">
+                                    <option value="fluid" selected="selected">Fluid</option>
+                                    <option value="boxed">Boxed</option>
+                                </select>
+                            </div>
+                            <div class="theme-option display-hide">
+                                <span>
+                                    Header </span>
+                                <select class="page-header-option form-control input-small">
+                                    <option value="fixed" selected="selected">Fixed</option>
+                                    <option value="default">Default</option>
+                                </select>
+                            </div>
+                            <div class="theme-option display-hide">
+                                <span>
+                                    Sidebar </span>
+                                <select class="sidebar-option form-control input-small">
+                                    <option value="fixed" selected="selected">Fixed</option>
+                                    <option value="default">Default</option>
+                                </select>
+                            </div>
+                            <div class="theme-option display-hide">
+                                <span>
+                                    Sidebar Position </span>
+                                <select class="sidebar-pos-option form-control input-small">
+                                    <option value="left" selected="selected">Left</option>
+                                    <option value="right">Right</option>
+                                </select>
+                            </div>
+                            <div class="theme-option display-hide">
+                                <span>
+                                    Footer </span>
+                                <select class="page-footer-option form-control input-small">
+                                    <option value="fixed">Fixed</option>
+                                    <option value="default" selected="selected">Default</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END STYLE CUSTOMIZER -->
+                    <ui:insert name="content"></ui:insert>
+                </div>
+            </div>
+            <!-- END CONTENT -->
+        </div>
+        <!-- END CONTAINER -->
+        <!-- BEGIN FOOTER -->
+        <div class="page-footer">
+            <div class="page-footer-inner">
+                2014 © PRCC.
+            </div>
+            <div class="page-footer-tools">
+                <span class="go-top">
+                    <i class="fa fa-angle-up"></i>
+                </span>
+            </div>
+        </div>
+        <!-- END FOOTER -->
+        <h:form prependId="false">
+            <h:inputText id="id-modal" class="display-hide" value="#{templateBean.idfk}"/>
+            <h:inputText id="tabela-modal" class="display-hide" value="#{templateBean.tabela}"/>
+            <h:commandLink class="show-info-modal">
+                <f:ajax execute="id-modal tabela-modal" listener="#{templateBean.exibirModalInfo}" render=":modal-info-pf :modal-info-pj :modal-info-pjud :modal-info-pjs"/>
+            </h:commandLink>
+            <h:commandLink class="show-new-modal">
+                <f:ajax execute="id-modal tabela-modal" listener="#{templateBean.exibirModalNew}" render=":modal_pf_form:modal-new-pf :modal_pj_form:modal-new-pj :modal_bem_form:modal-new-bem"/>
+            </h:commandLink>
+            <h:inputHidden id="sucessao-id" value="#{templateBean.sucessaoId}"></h:inputHidden>
+            <h:commandLink class="sucessao-refresher">
+                <f:ajax execute="sucessao-id" listener="#{templateBean.exibirSucessao}" render="sucessao"/>
+            </h:commandLink>
+            <h:panelGroup id="sucessao" class="display-hide">
+                <h:panelGroup layout="block" class="portlet box blue-chambray sucessao-info" rendered="#{not empty templateBean.pessoaJuridicaSucessao}">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <span>#{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucedidaFk.nome} </span><span><i class="fa fa-exchange"></i> #{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucessoraFk.nome}</span> 
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <!-- BEGIN SUCESSAO CONTENT-->
+                        <div class="form-body">
+                            <h3 class="form-section">Informações da Sucessão</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Empresa Sucedida:</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">
+                                                #{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucedidaFk.nome}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">CNPJ:</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">
+                                                <ui:param value="#{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucedidaFk.cnpj.substring(0,2)}.#{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucedidaFk.cnpj.substring(2,5)}.#{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucedidaFk.cnpj.substring(5,8)}/#{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucedidaFk.cnpj.substring(8,12)}-#{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucedidaFk.cnpj.substring(12)}" name="cnpj"/>
+                                                #{cnpj}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Empresa Sucessora:</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">
+                                                #{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucessoraFk.nome}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">CNPJ:</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">
+                                                <ui:param value="#{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucessoraFk.cnpj.substring(0,2)}.#{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucessoraFk.cnpj.substring(2,5)}.#{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucessoraFk.cnpj.substring(5,8)}/#{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucessoraFk.cnpj.substring(8,12)}-#{templateBean.pessoaJuridicaSucessao.pessoaJuridicaSucessoraFk.cnpj.substring(12)}" name="cnpj"/>
+                                                #{cnpj}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Data de Sucessao:</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">
+                                                #{templateBean.pessoaJuridicaSucessao.dataDeSucessao  eq null ? '-' : templateBean.pessoaJuridicaSucessao.dataDeSucessao}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:form>
+        <a class="btn default modal-info-pj display-hide" data-toggle="modal" href="#largepj"></a>
+        <ui:include src="../modal/consulta/pessoa-juridica.xhtml"></ui:include>
+        <a class="btn default modal-info-pjs display-hide" data-toggle="modal" href="#largepjs"></a>
+        <ui:include src="../modal/consulta/pessoa-juridica-sucessao.xhtml"></ui:include>
+        <a class="btn default modal-info-pf display-hide" data-toggle="modal" href="#largepf"></a>
+        <ui:include src="../modal/consulta/pessoa-fisica.xhtml"></ui:include>
+        <a class="btn default modal-info-pjud display-hide" data-toggle="modal" href="#largepjud"></a>
+        <ui:include src="../modal/consulta/processo-judicial.xhtml"></ui:include>
+        <a class="btn default modal-new-pj display-hide" data-toggle="modal" href="#largenewpj"></a>
+        <ui:include src="../modal/cadastro/pessoa-juridica.xhtml"></ui:include>
+        <a class="btn default modal-new-pf display-hide" data-toggle="modal" href="#largenewpf"></a>
+        <ui:include src="../modal/cadastro/pessoa-fisica.xhtml"></ui:include>
+        <a class="btn default modal-new-bem display-hide" data-toggle="modal" href="#largenewbem"></a>
+        <ui:include src="../modal/cadastro/bem.xhtml"></ui:include>
+
+        <span id="loading"></span>
+        <div id="loading-text" class="caption display-hide"><i class="fa fa-spin fa-refresh"></i> Pode demorar um pouco. Aguarde alguns instantes... <i class="fa fa-spin fa-refresh"></i></div>
+
+        <a class="btn default display-hide modal-activator" data-toggle="modal" href="#static"></a>
+        <div id="static" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Sessão expirada</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Faça o login novamente para continuar.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn blue-chambray login">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+        <!-- BEGIN CORE PLUGINS -->
+        <!--[if lt IE 9]>
+        <script src="assets/global/plugins/respond.min.js"></script>
+        <script src="assets/global/plugins/excanvas.min.js"></script> 
+        <![endif]-->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-idletimer/1.0.0/idle-timer.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js" type="text/javascript"></script>
+        <!-- END CORE PLUGINS -->
+        <script src="../assets/global/plugins/jquery-nestable/jquery.nestable.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.min.js"></script>
+        <script type="text/javascript" src="../assets/global/plugins/select2/select2_locale_pt-BR.js"></script>
+        <script src="../assets/global/scripts/combined_metronic-layout.min.js" type="text/javascript"></script>
+        <script src="../assets/admin/pages/scripts/modal-pf-cadastrar.js" type="text/javascript"></script>
+        <script src="../assets/admin/pages/scripts/modal-pj-cadastrar.js" type="text/javascript"></script>
+        <script src="../assets/admin/pages/scripts/modal-bem-cadastrar.js" type="text/javascript"></script>
+        <ui:insert name="page-scripts"></ui:insert>
+
+        <script>
+            //<![CDATA[
+            var executing = false;
+
+            if (Modernizr.localstorage) {
+                localStorage.clear();
+            }
+            $.idleTimer(60000 * 25);
+            $(document).bind("idle.idleTimer", function() {
+                $.cookie.raw = true;
+                $.cookie("pagina_anterior", window.location.pathname, {expires: 1, path: '/'});
+                window.location = "../bloquear-tela.xhtml";
+            });
+            var interval = window.setInterval(function() {
+                if ($.cookie('usuario') == null) {
+                    $('.modal-activator').click();
+                    window.clearInterval(interval);
+                }
+            }, 10000);
+            $('.login').click(function() {
+                window.location = "../login.xhtml";
+            });
+            $('.block-screen').click(function() {
+                $.cookie.raw = true;
+                $.cookie("pagina_anterior", window.location.pathname, {expires: 1, path: '/'});
+            });
+            $('.logout').click(function() {
+                $.removeCookie('usuario', {path: '/'});
+            });
+            $('.sidebar-search').submit(function(e) {
+                e.preventDefault();
+                window.location = "../procura-geral.xhtml?valor=" + $(this).find('.form-control').val();
+            });
+
+            $(document).on('click', '.pf-info', function() {
+                if (!executing) {
+                    $('#id-modal').val($(this).find('.object-id').val());
+                    $('#tabela-modal').val('PF');
+                    $('.show-info-modal').click();
+                }
+            });
+            $(document).on('click', '.pj-info', function() {
+                if (!executing) {
+                    $('#id-modal').val($(this).find('.object-id').val());
+                    $('#tabela-modal').val('PJ');
+                    $('.show-info-modal').click();
+                }
+            });
+            $(document).on('click', '.pjud-info', function() {
+                if (!executing) {
+                    $('#id-modal').val($(this).find('.object-id').val());
+                    $('#tabela-modal').val('PJUD');
+                    $('.show-info-modal').click();
+                }
+            });
+            $(document).on('click', '.pjs-info', function() {
+                if (!executing) {
+                    $('#id-modal').val($(this).find('.object-id').val());
+                    $('#tabela-modal').val('PJS');
+                    $('.show-info-modal').click();
+                }
+            });
+            var cnpjDropdown;
+            var cpfDropdown;
+            var bemPanel;
+            $(document).on('click', '.pj-new', function() {
+                if (!executing) {
+                    cnpjDropdown = $(this).closest(".row").find(".cnpjVinculate");
+                    $('#tabela-modal').val('PJ');
+                    $('.show-new-modal').click();
+                }
+            });
+            $(document).on('click', '.pf-new', function() {
+                if (!executing) {
+                    cpfDropdown = $(this).closest(".row").find(".cpfVinculate");
+                    $('#tabela-modal').val('PF');
+                    $('.show-new-modal').click();
+                }
+            });
+            $(document).on('click', '.bem-new', function() {
+                if (!executing) {
+                    bemPanel = {
+                        panel: $(this).closest('.panel-collapse').attr('id')
+                    };
+                    $('#id-modal').val($(this).find('.object-id').html().trim());
+                    $('#tabela-modal').val('BEM');
+                    $('.show-new-modal').click();
+                }
+            });
+            var element;
+
+            $(document).on('click', '.dd3-content', function() {
+                if ($(this).parent().children('.suc-id').val().length > 0) {
+                    $('#sucessao-id').val($(this).parent().children('.suc-id').val());
+                    $('.sucessao-refresher').click();
+                    element = $(this);
+                }
+            });
+
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                        results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+
+            Array.prototype.removeValue = function(name, value) {
+                var array = $.map(this, function(v, i) {
+                    return v[name] === value ? null : v;
+                });
+                this.length = 0; //clear original array
+                this.push.apply(this, array); //push all elements except the one we want to delete
+            }
+
+            function setCursors(ajax) {
+                if (ajax === "begin") {
+                    $('body').css('cursor', 'wait');
+                    $('.row-details').css('cursor', 'wait');
+                    $('a').css('cursor', 'wait');
+                } else {
+                    $('body').css('cursor', 'auto');
+                    $('.row-details').css('cursor', 'pointer');
+                    $('a').css('cursor', 'pointer');
+                }
+            }
+
+            var spinner;
+            jsf.ajax.addOnEvent(function(data) {
+                switch (data.status) {
+                    case "begin":
+                        if ($(data.source).hasClass("load-history")) {
+                            var opts = {
+                                lines: 13, // The number of lines to draw
+                                length: 20, // The length of each line
+                                width: 10, // The line thickness
+                                radius: 30, // The radius of the inner circle
+                                corners: 1, // Corner roundness (0..1)
+                                rotate: 0, // The rotation offset
+                                direction: 1, // 1: clockwise, -1: counterclockwise
+                                color: '#2c3e50', // #rgb or #rrggbb or array of colors
+                                speed: 1, // Rounds per second
+                                trail: 60, // Afterglow percentage
+                                shadow: false, // Whether to render a shadow
+                                hwaccel: false, // Whether to use hardware acceleration
+                                className: 'spinner', // The CSS class to assign to the spinner
+                                zIndex: 2e9, // The z-index (defaults to 2000000000)
+                                top: '50%', // Top position relative to parent
+                                left: '50%' // Left position relative to parent
+                            };
+                            var target = document.getElementById('loading');
+                            spinner = new Spinner(opts).spin(target);
+                            target.appendChild(spinner.el);
+                            $('#loading-text').show();
+                        }
+                        setCursors(data.status);
+                        executing = true;
+                        break;
+                    case "complete":
+                        executing = true;
+                        break;
+                }
+                if (data.status === 'success') {
+                    setCursors(data.status);
+                    if ($(data.source).hasClass('load-history')) {
+                        $('#loading-text').hide();
+                        spinner.stop();
+                    } else if ($(data.source).attr("class") === "show-info-modal") {
+                        if ($('#tabela-modal').val() === "PF") {
+                            getMoneyMask(".accordion-modal-pfcon");
+                            $('.modal-info-pf').click();
+                        } else if ($('#tabela-modal').val() === "PJ") {
+                            getMoneyMask(".accordion-modal-pjcon");
+                            $('.modal-info-pj').click();
+                            getSucessoes('#id-modal', '#modal-info-pj');
+                        } else if ($('#tabela-modal').val() === "PJUD") {
+                            getMoneyMask('#modal-info-pjud');
+                            citado();
+                            $('.modal-info-pjud').click();
+                            getSucessoes('#pj-id', '#modal-info-pjud');
+                        } else if ($('#tabela-modal').val() === "PJS") {
+                            $('.modal-info-pjs').click();
+                        }
+                        $('.modal-info').find('table').dataTable({
+                            destroy: true,
+                            paginate: false,
+                            lengthMenu: false,
+                            info: false,
+                            filter: false,
+                            // set the initial value
+                            "pageLength": 10,
+                            "language": {
+                                "emptyTable": "Sem Vínculos."
+                            },
+                            "ordering": false
+                        });
+                    } else if ($(data.source).attr("class") === "show-new-modal") {
+                        if ($('#tabela-modal').val() === "PF") {
+                            $('.modal-new-pf').click();
+                            ModalPFCad.init();
+                        }
+                        else if ($('#tabela-modal').val() === "PJ") {
+                            $('.modal-new-pj').click();
+                            ModalPJCad.init();
+                        } else if ($('#tabela-modal').val() === "BEM") {
+                            $('.modal-new-bem').click();
+                            ModalBEMCad.init();
+                        }
+                    } else if ($(data.source).attr('class') === "modal_pj_register") {
+                        $('#largenewpj').modal("hide");
+                        refreshCNPJDropdown(cnpjDropdown);
+                        if ((window.location.pathname).indexOf("sucessao") !== -1) {
+                            verPessoaJuridicaDasSucessoes();
+                        } else if ((window.location.pathname).indexOf("processo-judicial") !== -1) {
+                            verExecutado();
+                        }
+                    } else if ($(data.source).attr('class') === "modal_pf_register") {
+                        $('#largenewpf').modal("hide");
+                        refreshCPFDropdown(cpfDropdown);
+                        if ((window.location.pathname).indexOf("processo-judicial") !== -1) {
+                            verExecutado();
+                        }
+                    } else if ($(data.source).attr('class') === "modal_bem_register") {
+                        $('#largenewbem').modal("hide");
+                        $('.bem-refresher').click();
+                    } else if ($(data.source).attr('class') === 'sucessao-refresher') {
+                        $(element).closest('.nestable-list').find('.sucessao-info').remove();
+                        $('#sucessao').children().clone().appendTo($(element).closest('.nestable-list'));
+                    }
+                    executing = false;
+                }
+            });
+
+            function citado() {
+                $.each($('.citado'), function() {
+                    if ($(this).html().trim() === "Sim") {
+                        $(this).parents('.panel').removeClass('panel-danger').addClass('panel-success');
+                        $(this).parents('.panel-body').find('.motivo').hide();
+                    }
+                })
+            }
+
+            function refreshCNPJDropdown(object) {
+                $.ajax({
+                    async: false,
+                    url: "/webresources/reaver/getPessoasJuridicas",
+                    dataType: "json",
+                    cache: false,
+                    data: {
+                        usuario: $.cookie("usuario")
+                    }
+                })
+                        .done(function(data) {
+                            $(object).select2({
+                                initSelection: function(element, callback) {
+                                    var selection = _.find(data, function(metric) {
+                                        return metric.id === element.val();
+                                    })
+                                    callback(selection);
+                                },
+                                query: function(options) {
+                                    var pageSize = 100;
+                                    var startIndex = (options.page - 1) * pageSize;
+                                    var filteredData = data;
+
+                                    if (options.term && options.term.length > 0) {
+                                        if (!options.context) {
+                                            var term = options.term.toLowerCase();
+                                            options.context = data.filter(function(metric) {
+                                                return (removeDiacritics(metric.text.toLowerCase()).indexOf(removeDiacritics(term)) >= 0);
+                                            });
+                                        }
+                                        filteredData = options.context;
+                                    }
+
+                                    options.callback({
+                                        context: filteredData,
+                                        results: filteredData.slice(startIndex, startIndex + pageSize),
+                                        more: (startIndex + pageSize) < filteredData.length
+                                    });
+                                },
+                                placeholder: "Selecione...",
+                                allowClear: true,
+                            }).select2("val", $("#modal_pj_id").val());
+                        });
+            }
+
+            function refreshCPFDropdown(object) {
+                $.ajax({
+                    async: false,
+                    url: "/webresources/reaver/getPessoasFisicas",
+                    dataType: "json",
+                    cache: false,
+                    data: {
+                        usuario: $.cookie("usuario")
+                    }
+                })
+                        .done(function(data) {
+                            $(object).select2({
+                                initSelection: function(element, callback) {
+                                    var selection = _.find(data, function(metric) {
+                                        return metric.id === element.val();
+                                    })
+                                    callback(selection);
+                                },
+                                query: function(options) {
+                                    var pageSize = 100;
+                                    var startIndex = (options.page - 1) * pageSize;
+                                    var filteredData = data;
+
+                                    if (options.term && options.term.length > 0) {
+                                        if (!options.context) {
+                                            var term = options.term.toLowerCase();
+                                            options.context = data.filter(function(metric) {
+                                                return (removeDiacritics(metric.text.toLowerCase()).indexOf(removeDiacritics(term)) >= 0);
+                                            });
+                                        }
+                                        filteredData = options.context;
+                                    }
+
+                                    options.callback({
+                                        context: filteredData,
+                                        results: filteredData.slice(startIndex, startIndex + pageSize),
+                                        more: (startIndex + pageSize) < filteredData.length
+                                    });
+                                },
+                                placeholder: "Selecione...",
+                                allowClear: true,
+                            }).select2("val", $("#modal_pf_id").val());
+                        });
+            }
+
+            function getMoneyMask(parent) {
+                $.each($(parent).find('.money'), function() {
+                    if ($(this).html().trim() !== "-") {
+                        $($(this)).html(function(i, val) {
+                            val = val.replace(".", ",").trim();
+                            var decimal = val.indexOf(',') === -1 ? val.length : val.indexOf(',');
+                            var newVal = val.indexOf(',') === -1 ? ",00" : val.substring(val.indexOf(','));
+                            newVal = val.substring(val.indexOf(',')).length === 2 ? newVal + "0" : newVal;
+                            var index = 1;
+                            for (var i = decimal; i > 0; i--) {
+                                if (index >= 3) {
+                                    if (index % 3 === 0 && i !== 1) {
+                                        newVal = "." + val.charAt(i - 1) + newVal;
+                                    } else {
+                                        newVal = val.charAt(i - 1) + newVal;
+                                    }
+                                } else {
+                                    newVal = val.charAt(i - 1) + newVal;
+                                }
+                                index++;
+                            }
+                            return 'R$ ' + newVal;
+                        });
+                    }
+                });
+            }
+
+            function getSucessoes(id, parent, portlet, removeGrant, displayHistory) {
+                var pjId = $(id).val();
+                if (pjId !== undefined) {
+                    $.ajax({
+                        url: "/webresources/reaver/getSucessoes",
+                        data: {
+                            id: pjId
+                        },
+                        dataType: "json",
+                        cache: false
+                    })
+                            .done(function(data) {
+                                var sucedidas = "";
+                                var atual = "";
+                                var sucessoras = "";
+                                var icon = parent.indexOf('modal') !== -1 ? '<i class="fa fa-bank"></i>' : '<i class="fa fa-search"></i>';
+                                var modal = parent.indexOf('modal') !== -1 ? '' : 'pj-info';
+                                $.each(data, function() {
+                                    var status;
+                                    if (String(pjId) === String($(this).attr('sucessora_id'))) {
+                                        status = $(this).attr('sucedida_status') === 'A' ? '' : '<strong> (DESATIVADA)</strong>';
+                                        sucedidas += '<li class="sucedidas dd-item dd3-item"><input class="suc-id display-hide" value="' + $(this).attr('sucessao_id') + '" type="text"/>'
+                                                + '<div class="dd-handle dd3-handle ' + modal + '">' + icon + '<input class="object-id display-hide" value="' + $(this).attr('sucedida_id') + '" type="text"/></div>'
+                                                + '<div class="dd3-content"><strong>' + $(this).attr('sucedida_nome') + ':</strong> ' + $(this).attr('sucedida_cnpj') + status + '</div></li>';
+                                    } else if (String(pjId) === String($(this).attr('sucedida_id'))) {
+                                        status = $(this).attr('sucessora_status') === 'A' ? '' : '<strong> (DESATIVADA)</strong>';
+                                        sucessoras += '<li class="sucessoras dd-item dd3-item"><input class="suc-id display-hide" value="' + $(this).attr('sucessao_id') + '" type="text"/>'
+                                                + '<div class="dd-handle dd3-handle ' + modal + '">' + icon + '<input class="object-id display-hide" value="' + $(this).attr('sucessora_id') + '" type="text"/></div>'
+                                                + '<div class="dd3-content"><strong>' + $(this).attr('sucessora_nome') + ':</strong> ' + $(this).attr('sucessora_cnpj') + status + '</div></li>';
+                                    }
+                                });
+                                if (sucedidas === "" && sucessoras === "") {
+                                    $(parent).find('.nestable-list').children().remove();
+                                    $(parent).find('.nestable-list').append('<div layout="block" class="alert alert-warning">Não há sucessões para esta Pessoa Jurídica.</div>');
+                                } else {
+                                    atual += '<li class="atual dd-item dd3-item"><div class="dd-handle dd3-handle"><i class="fa fa-bank"></i></div>'
+                                            + '<div class="dd3-content"><strong>' + $(parent).find('.nome').html().trim() + ':</strong> ' + $(parent).find('.cnpj').html().trim() + '</div></li>';
+                                    $(parent).find('.dd-list').append(sucedidas);
+                                    if (sucedidas !== "") {
+                                        atual = '<ol class="dd-list">' + atual + '</ol>';
+                                        $(parent).find('.sucedidas').last().append(atual);
+                                    } else {
+                                        $(parent).find('.dd-list').append(atual);
+                                    }
+                                    if (sucessoras !== "") {
+                                        sucessoras = '<ol class="dd-list">' + sucessoras + '</ol>';
+                                        $(parent).find('.atual').append(sucessoras);
+                                    }
+                                }
+
+                                if (removeGrant) {
+                                    var remove = '<a class="button-delete-sucessao"><i class="glyphicon glyphicon-remove"></i></a>';
+                                    $(parent).find('.sucedidas').children(".dd3-content").append(remove);
+                                    $(parent).find('.sucessoras').children(".dd3-content").append(remove);
+                                }
+
+                                if (displayHistory) {
+                                    var history = '<a class="button-history-sucessao"><i class="fa fa-history"></i></a>';
+                                    $(parent).find('.sucedidas').children(".dd3-content").append(history);
+                                    $(parent).find('.sucessoras').children(".dd3-content").append(history);
+                                }
+
+                                $(parent).find('.sucedidas').children(".dd3-content").append('<strong class="sucessao-label-right">(Sucedida)</strong>');
+                                $(parent).find('.sucessoras').children(".dd3-content").append('<strong class="sucessao-label-right">(Sucessora)</strong>');
+                                if (portlet !== undefined) {
+                                    reallocatePortlet(portlet);
+                                }
+                            });
+                }
+
+                function reallocatePortlet(portlet) {
+                    $(portlet).addClass("row-details-open").removeClass("row-details-close");
+                    $("<tr class='detailed-info'><td class='detail' colspan='6'></td></tr>").insertAfter($(portlet).parent().parent());
+                    $('#info').children().clone().appendTo($(portlet).parent().parent().next().children());
+                    $(portlet).parent().parent().children(".detail").appendTo($(portlet).parent().parent().next());
+                    $(portlet).parent().parent().next().find('table').dataTable({
+                        paginate: false,
+                        lengthMenu: false,
+                        info: false,
+                        filter: false,
+                        // set the initial value
+                        "pageLength": 10,
+                        "language": {
+                            "emptyTable": "Sem V&iacute;nculos."
+                        },
+                        "ordering": false
+                    });
+                    getMoneyMask($(portlet).parent().parent().next().find(".accordion-pjcon"));
+                }
+            }
+
+            function verPessoaJuridicaDasSucessoes() {
+                var empty = $('.cnpjVinculate').filter(function() {
+                    return this.value === "";
+                });
+                empty.length ? $('.submit-sucessao').hide() : $('.submit-sucessao').show();
+                $.each($('.cnpjVinculate'), function() {
+                    if ($(this).val() !== '') {
+                        $(this).closest('.row').find('.pj-info').show();
+                        $(this).closest('.row').find('.pj-info').children('.object-id').val($(this).val());
+                    } else {
+                        $(this).closest('.row').find('.pj-info').hide();
+                    }
+                })
+            }
+
+            function verExecutado() {
+                $('#pessoa-fisica').hide();
+                $('#pessoa-juridica').hide();
+                if ($('#cpf').val() !== "") {
+                    $('.button-pessoa-fisica').show();
+                    $('.button-pessoa-fisica').closest('.form-group').removeClass('has-error');
+                    $('.button-pessoa-fisica').closest('.form-group').find('.help-block').remove();
+                } else if ($('#cnpj').val() !== "") {
+                    $('.button-pessoa-juridica').show();
+                    $('.button-pessoa-juridica').closest('.form-group').removeClass('has-error');
+                    $('.button-pessoa-juridica').closest('.form-group').find('.help-block').remove();
+                } else {
+                    $('.button-pessoa-fisica').hide();
+                    $('.button-pessoa-juridica').hide();
+                }
+                if ($(this).next('span').length > 0) {
+                    if ($(this).val() !== "") {
+                        $(this).closest('.form-group').removeClass("has-error");
+                        $(this).next('span').hide();
+                    } else {
+                        $(this).closest('.form-group').addClass("has-error");
+                        $(this).next('span').show();
+                    }
+                }
+            }
+
+            function accents_supr(data) {
+                return !data ?
+                        '' :
+                        typeof data === 'string' ?
+                        data
+                        .replace(/\n/g, ' ')
+                        .replace(/[áàäâãÁÀÄÂÃ]/g, 'a')
+                        .replace(/[éèëêẽÉÈËÊẼ]/g, 'e')
+                        .replace(/[íìïîĩÍÌÏÎĨ]/g, 'i')
+                        .replace(/[óòöôõÓÒÖÔÕ]/g, 'o')
+                        .replace(/[úùüûũÚÙÜÛŨ]/g, 'u')
+                        .replace(/[çÇ]/g, 'c') :
+                        data;
+            }
+            ;
+            jQuery.extend(jQuery.fn.dataTableExt.oSort,
+                    {
+                        "string-asc": function(s1, s2) {
+                            return s1.localeCompare(s2);
+                        },
+                        "string-desc": function(s1, s2) {
+                            return s2.localeCompare(s1);
+                        }
+                    });
+
+            $.fn.dataTableExt.ofnSearch['string'] = function(data) {
+                return accents_supr(data);
+            }
+
+            var defaultDiacriticsRemovalap = [
+                {'base': 'A', 'letters': '\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F'},
+                {'base': 'AA', 'letters': '\uA732'},
+                {'base': 'AE', 'letters': '\u00C6\u01FC\u01E2'},
+                {'base': 'AO', 'letters': '\uA734'},
+                {'base': 'AU', 'letters': '\uA736'},
+                {'base': 'AV', 'letters': '\uA738\uA73A'},
+                {'base': 'AY', 'letters': '\uA73C'},
+                {'base': 'B', 'letters': '\u0042\u24B7\uFF22\u1E02\u1E04\u1E06\u0243\u0182\u0181'},
+                {'base': 'C', 'letters': '\u0043\u24B8\uFF23\u0106\u0108\u010A\u010C\u00C7\u1E08\u0187\u023B\uA73E'},
+                {'base': 'D', 'letters': '\u0044\u24B9\uFF24\u1E0A\u010E\u1E0C\u1E10\u1E12\u1E0E\u0110\u018B\u018A\u0189\uA779'},
+                {'base': 'DZ', 'letters': '\u01F1\u01C4'},
+                {'base': 'Dz', 'letters': '\u01F2\u01C5'},
+                {'base': 'E', 'letters': '\u0045\u24BA\uFF25\u00C8\u00C9\u00CA\u1EC0\u1EBE\u1EC4\u1EC2\u1EBC\u0112\u1E14\u1E16\u0114\u0116\u00CB\u1EBA\u011A\u0204\u0206\u1EB8\u1EC6\u0228\u1E1C\u0118\u1E18\u1E1A\u0190\u018E'},
+                {'base': 'F', 'letters': '\u0046\u24BB\uFF26\u1E1E\u0191\uA77B'},
+                {'base': 'G', 'letters': '\u0047\u24BC\uFF27\u01F4\u011C\u1E20\u011E\u0120\u01E6\u0122\u01E4\u0193\uA7A0\uA77D\uA77E'},
+                {'base': 'H', 'letters': '\u0048\u24BD\uFF28\u0124\u1E22\u1E26\u021E\u1E24\u1E28\u1E2A\u0126\u2C67\u2C75\uA78D'},
+                {'base': 'I', 'letters': '\u0049\u24BE\uFF29\u00CC\u00CD\u00CE\u0128\u012A\u012C\u0130\u00CF\u1E2E\u1EC8\u01CF\u0208\u020A\u1ECA\u012E\u1E2C\u0197'},
+                {'base': 'J', 'letters': '\u004A\u24BF\uFF2A\u0134\u0248'},
+                {'base': 'K', 'letters': '\u004B\u24C0\uFF2B\u1E30\u01E8\u1E32\u0136\u1E34\u0198\u2C69\uA740\uA742\uA744\uA7A2'},
+                {'base': 'L', 'letters': '\u004C\u24C1\uFF2C\u013F\u0139\u013D\u1E36\u1E38\u013B\u1E3C\u1E3A\u0141\u023D\u2C62\u2C60\uA748\uA746\uA780'},
+                {'base': 'LJ', 'letters': '\u01C7'},
+                {'base': 'Lj', 'letters': '\u01C8'},
+                {'base': 'M', 'letters': '\u004D\u24C2\uFF2D\u1E3E\u1E40\u1E42\u2C6E\u019C'},
+                {'base': 'N', 'letters': '\u004E\u24C3\uFF2E\u01F8\u0143\u00D1\u1E44\u0147\u1E46\u0145\u1E4A\u1E48\u0220\u019D\uA790\uA7A4'},
+                {'base': 'NJ', 'letters': '\u01CA'},
+                {'base': 'Nj', 'letters': '\u01CB'},
+                {'base': 'O', 'letters': '\u004F\u24C4\uFF2F\u00D2\u00D3\u00D4\u1ED2\u1ED0\u1ED6\u1ED4\u00D5\u1E4C\u022C\u1E4E\u014C\u1E50\u1E52\u014E\u022E\u0230\u00D6\u022A\u1ECE\u0150\u01D1\u020C\u020E\u01A0\u1EDC\u1EDA\u1EE0\u1EDE\u1EE2\u1ECC\u1ED8\u01EA\u01EC\u00D8\u01FE\u0186\u019F\uA74A\uA74C'},
+                {'base': 'OI', 'letters': '\u01A2'},
+                {'base': 'OO', 'letters': '\uA74E'},
+                {'base': 'OU', 'letters': '\u0222'},
+                {'base': 'OE', 'letters': '\u008C\u0152'},
+                {'base': 'oe', 'letters': '\u009C\u0153'},
+                {'base': 'P', 'letters': '\u0050\u24C5\uFF30\u1E54\u1E56\u01A4\u2C63\uA750\uA752\uA754'},
+                {'base': 'Q', 'letters': '\u0051\u24C6\uFF31\uA756\uA758\u024A'},
+                {'base': 'R', 'letters': '\u0052\u24C7\uFF32\u0154\u1E58\u0158\u0210\u0212\u1E5A\u1E5C\u0156\u1E5E\u024C\u2C64\uA75A\uA7A6\uA782'},
+                {'base': 'S', 'letters': '\u0053\u24C8\uFF33\u1E9E\u015A\u1E64\u015C\u1E60\u0160\u1E66\u1E62\u1E68\u0218\u015E\u2C7E\uA7A8\uA784'},
+                {'base': 'T', 'letters': '\u0054\u24C9\uFF34\u1E6A\u0164\u1E6C\u021A\u0162\u1E70\u1E6E\u0166\u01AC\u01AE\u023E\uA786'},
+                {'base': 'TZ', 'letters': '\uA728'},
+                {'base': 'U', 'letters': '\u0055\u24CA\uFF35\u00D9\u00DA\u00DB\u0168\u1E78\u016A\u1E7A\u016C\u00DC\u01DB\u01D7\u01D5\u01D9\u1EE6\u016E\u0170\u01D3\u0214\u0216\u01AF\u1EEA\u1EE8\u1EEE\u1EEC\u1EF0\u1EE4\u1E72\u0172\u1E76\u1E74\u0244'},
+                {'base': 'V', 'letters': '\u0056\u24CB\uFF36\u1E7C\u1E7E\u01B2\uA75E\u0245'},
+                {'base': 'VY', 'letters': '\uA760'},
+                {'base': 'W', 'letters': '\u0057\u24CC\uFF37\u1E80\u1E82\u0174\u1E86\u1E84\u1E88\u2C72'},
+                {'base': 'X', 'letters': '\u0058\u24CD\uFF38\u1E8A\u1E8C'},
+                {'base': 'Y', 'letters': '\u0059\u24CE\uFF39\u1EF2\u00DD\u0176\u1EF8\u0232\u1E8E\u0178\u1EF6\u1EF4\u01B3\u024E\u1EFE'},
+                {'base': 'Z', 'letters': '\u005A\u24CF\uFF3A\u0179\u1E90\u017B\u017D\u1E92\u1E94\u01B5\u0224\u2C7F\u2C6B\uA762'},
+                {'base': 'a', 'letters': '\u0061\u24D0\uFF41\u1E9A\u00E0\u00E1\u00E2\u1EA7\u1EA5\u1EAB\u1EA9\u00E3\u0101\u0103\u1EB1\u1EAF\u1EB5\u1EB3\u0227\u01E1\u00E4\u01DF\u1EA3\u00E5\u01FB\u01CE\u0201\u0203\u1EA1\u1EAD\u1EB7\u1E01\u0105\u2C65\u0250'},
+                {'base': 'aa', 'letters': '\uA733'},
+                {'base': 'ae', 'letters': '\u00E6\u01FD\u01E3'},
+                {'base': 'ao', 'letters': '\uA735'},
+                {'base': 'au', 'letters': '\uA737'},
+                {'base': 'av', 'letters': '\uA739\uA73B'},
+                {'base': 'ay', 'letters': '\uA73D'},
+                {'base': 'b', 'letters': '\u0062\u24D1\uFF42\u1E03\u1E05\u1E07\u0180\u0183\u0253'},
+                {'base': 'c', 'letters': '\u0063\u24D2\uFF43\u0107\u0109\u010B\u010D\u00E7\u1E09\u0188\u023C\uA73F\u2184'},
+                {'base': 'd', 'letters': '\u0064\u24D3\uFF44\u1E0B\u010F\u1E0D\u1E11\u1E13\u1E0F\u0111\u018C\u0256\u0257\uA77A'},
+                {'base': 'dz', 'letters': '\u01F3\u01C6'},
+                {'base': 'e', 'letters': '\u0065\u24D4\uFF45\u00E8\u00E9\u00EA\u1EC1\u1EBF\u1EC5\u1EC3\u1EBD\u0113\u1E15\u1E17\u0115\u0117\u00EB\u1EBB\u011B\u0205\u0207\u1EB9\u1EC7\u0229\u1E1D\u0119\u1E19\u1E1B\u0247\u025B\u01DD'},
+                {'base': 'f', 'letters': '\u0066\u24D5\uFF46\u1E1F\u0192\uA77C'},
+                {'base': 'g', 'letters': '\u0067\u24D6\uFF47\u01F5\u011D\u1E21\u011F\u0121\u01E7\u0123\u01E5\u0260\uA7A1\u1D79\uA77F'},
+                {'base': 'h', 'letters': '\u0068\u24D7\uFF48\u0125\u1E23\u1E27\u021F\u1E25\u1E29\u1E2B\u1E96\u0127\u2C68\u2C76\u0265'},
+                {'base': 'hv', 'letters': '\u0195'},
+                {'base': 'i', 'letters': '\u0069\u24D8\uFF49\u00EC\u00ED\u00EE\u0129\u012B\u012D\u00EF\u1E2F\u1EC9\u01D0\u0209\u020B\u1ECB\u012F\u1E2D\u0268\u0131'},
+                {'base': 'j', 'letters': '\u006A\u24D9\uFF4A\u0135\u01F0\u0249'},
+                {'base': 'k', 'letters': '\u006B\u24DA\uFF4B\u1E31\u01E9\u1E33\u0137\u1E35\u0199\u2C6A\uA741\uA743\uA745\uA7A3'},
+                {'base': 'l', 'letters': '\u006C\u24DB\uFF4C\u0140\u013A\u013E\u1E37\u1E39\u013C\u1E3D\u1E3B\u017F\u0142\u019A\u026B\u2C61\uA749\uA781\uA747'},
+                {'base': 'lj', 'letters': '\u01C9'},
+                {'base': 'm', 'letters': '\u006D\u24DC\uFF4D\u1E3F\u1E41\u1E43\u0271\u026F'},
+                {'base': 'n', 'letters': '\u006E\u24DD\uFF4E\u01F9\u0144\u00F1\u1E45\u0148\u1E47\u0146\u1E4B\u1E49\u019E\u0272\u0149\uA791\uA7A5'},
+                {'base': 'nj', 'letters': '\u01CC'},
+                {'base': 'o', 'letters': '\u006F\u24DE\uFF4F\u00F2\u00F3\u00F4\u1ED3\u1ED1\u1ED7\u1ED5\u00F5\u1E4D\u022D\u1E4F\u014D\u1E51\u1E53\u014F\u022F\u0231\u00F6\u022B\u1ECF\u0151\u01D2\u020D\u020F\u01A1\u1EDD\u1EDB\u1EE1\u1EDF\u1EE3\u1ECD\u1ED9\u01EB\u01ED\u00F8\u01FF\u0254\uA74B\uA74D\u0275'},
+                {'base': 'oi', 'letters': '\u01A3'},
+                {'base': 'ou', 'letters': '\u0223'},
+                {'base': 'oo', 'letters': '\uA74F'},
+                {'base': 'p', 'letters': '\u0070\u24DF\uFF50\u1E55\u1E57\u01A5\u1D7D\uA751\uA753\uA755'},
+                {'base': 'q', 'letters': '\u0071\u24E0\uFF51\u024B\uA757\uA759'},
+                {'base': 'r', 'letters': '\u0072\u24E1\uFF52\u0155\u1E59\u0159\u0211\u0213\u1E5B\u1E5D\u0157\u1E5F\u024D\u027D\uA75B\uA7A7\uA783'},
+                {'base': 's', 'letters': '\u0073\u24E2\uFF53\u00DF\u015B\u1E65\u015D\u1E61\u0161\u1E67\u1E63\u1E69\u0219\u015F\u023F\uA7A9\uA785\u1E9B'},
+                {'base': 't', 'letters': '\u0074\u24E3\uFF54\u1E6B\u1E97\u0165\u1E6D\u021B\u0163\u1E71\u1E6F\u0167\u01AD\u0288\u2C66\uA787'},
+                {'base': 'tz', 'letters': '\uA729'},
+                {'base': 'u', 'letters': '\u0075\u24E4\uFF55\u00F9\u00FA\u00FB\u0169\u1E79\u016B\u1E7B\u016D\u00FC\u01DC\u01D8\u01D6\u01DA\u1EE7\u016F\u0171\u01D4\u0215\u0217\u01B0\u1EEB\u1EE9\u1EEF\u1EED\u1EF1\u1EE5\u1E73\u0173\u1E77\u1E75\u0289'},
+                {'base': 'v', 'letters': '\u0076\u24E5\uFF56\u1E7D\u1E7F\u028B\uA75F\u028C'},
+                {'base': 'vy', 'letters': '\uA761'},
+                {'base': 'w', 'letters': '\u0077\u24E6\uFF57\u1E81\u1E83\u0175\u1E87\u1E85\u1E98\u1E89\u2C73'},
+                {'base': 'x', 'letters': '\u0078\u24E7\uFF58\u1E8B\u1E8D'},
+                {'base': 'y', 'letters': '\u0079\u24E8\uFF59\u1EF3\u00FD\u0177\u1EF9\u0233\u1E8F\u00FF\u1EF7\u1E99\u1EF5\u01B4\u024F\u1EFF'},
+                {'base': 'z', 'letters': '\u007A\u24E9\uFF5A\u017A\u1E91\u017C\u017E\u1E93\u1E95\u01B6\u0225\u0240\u2C6C\uA763'}
+            ];
+
+            var diacriticsMap = {};
+            for (var i = 0; i < defaultDiacriticsRemovalap.length; i++) {
+                var letters = defaultDiacriticsRemovalap[i].letters.split("");
+                for (var j = 0; j < letters.length; j++) {
+                    diacriticsMap[letters[j]] = defaultDiacriticsRemovalap[i].base;
+                }
+            }
+
+// "what?" version ... http://jsperf.com/diacritics/12
+            function removeDiacritics(str) {
+                return str.replace(/[^\u0000-\u007E]/g, function(a) {
+                    return diacriticsMap[a] || a;
+                });
+            }
+
+            //]]>
+        </script>
+    </h:body>
+    <!-- END BODY -->
+</html>

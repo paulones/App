@@ -1,0 +1,56 @@
+/*general*/
+.breadcrumb-jsf{margin-left:3px}
+#loading{position:fixed;top:50%;left:50%}
+#loading-text{background-color:#2c3e50;color:#fff;border-radius:10px;padding:10px 25px;font-size:14px;position:fixed;top:65%;left:50%;margin-left:-220px;text-align:center;font-weight: 400}
+.width-expand{width:3%}
+.width-data{width:16%}
+.width-descricao{width:47%}
+.width-usuario{width:40%}
+/*login-soft*/
+.login-title{color:#EEEEEE}
+/*index*/
+.home-logo{margin-top:15px}
+.modal .control-label{margin-top:6px !important}
+.filter-by{width:220px}
+#ano{margin:0 10px;font-weight:bold}
+#anoRevenue{margin:0 10px;font-weight:bold}
+.interactive{cursor:pointer}
+.interactive:hover{color:gray}
+.sucessao-label-right{margin-right:15px;float:right}
+/*lock*/
+.password-error{margin:10px 0 -10px 0}
+/*cadastroPF*/
+.obs{resize:none}
+#gender{margin-top:7px}
+#gender .radio{margin-right:4px}
+#gender label{margin-right:33px}
+#gender input{margin-left:-9px}
+.p-info td{white-space:pre-line}
+.pj-info{color:black}
+.pf-info{color:black}
+.modal-pessoa{padding:0px !important}
+.modal-pessoa .portlet{margin-bottom:0px !important}
+/*consultaPF*/
+.expand-example{margin-top: 3px;display: inline-block;cursor: auto;width: 14px;height: 14px;background:url('../../../global/img/datatable-row-openclose.png') no-repeat scroll 0 0 rgba(0, 0, 0, 0)}
+/*cadastroPJ*/
+#situacao{margin-top:3px}
+#situacao .radio{margin-right:4px}
+#situacao label{margin-right:33px}
+#situacao input{margin-left:-9px}
+/*cadastroPJUD*/
+textarea{resize:none}
+.uniformization{margin-top:7px}
+.uniformization .radio{margin-right:4px}
+.uniformization label{margin-right:33px}
+.uniformization input{margin-left:-9px !important}
+/*cadastroPJMODAL*/
+#modal_pj_situacao{margin-top:3px}
+#modal_pj_situacao .radio{margin-right:4px}
+#modal_pj_situacao label{margin-right:33px}
+#modal_pj_situacao input{margin-left:-9px}
+/*cadastroPFMODAL*/
+.modal_pf_obs{resize:none}
+#modal_pf_gender{margin-top:7px}
+#modal_pf_gender .radio{margin-right:4px}
+#modal_pf_gender label{margin-right:33px}
+#modal_pf_gender input{margin-left:-9px}

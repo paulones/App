@@ -17,7 +17,6 @@ import com.ppcc.app.model.entity.EnderecoPessoa;
 import com.ppcc.app.model.entity.EnderecoPessoaFisicaJuridicaHistorico;
 import com.ppcc.app.model.entity.Estado;
 import com.ppcc.app.model.entity.Funcao;
-import com.ppcc.app.model.entity.Instituicao;
 import com.ppcc.app.model.entity.PessoaFisica;
 import com.ppcc.app.model.entity.PessoaFisicaJuridica;
 import com.ppcc.app.model.entity.PessoaFisicaJuridicaHistorico;
@@ -60,20 +59,20 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import com.ppcc.app.util.Cookie;
 import com.ppcc.app.util.GeradorLog;
 import com.ppcc.app.util.MetodosConvencionais;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author Pedro
  */
+@Named
 @ViewScoped
-@ManagedBean(name = "pessoaJuridicaBean")
 public class PessoaJuridicaBean implements Serializable {
 
     private PessoaJuridica pessoaJuridica;

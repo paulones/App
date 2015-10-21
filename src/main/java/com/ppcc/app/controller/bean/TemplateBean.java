@@ -5,7 +5,6 @@
  */
 package com.ppcc.app.controller.bean;
 
-import com.ppcc.app.model.entity.Autorizacao;
 import com.ppcc.app.model.entity.Bem;
 import com.ppcc.app.model.entity.Cidade;
 import com.ppcc.app.model.entity.Citacao;
@@ -58,19 +57,17 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import com.ppcc.app.util.Cookie;
 import com.ppcc.app.util.GeradorLog;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author ipti004
  */
-@ManagedBean(name = "templateBean")
+@Named
 @ViewScoped
 public class TemplateBean implements Serializable {
 

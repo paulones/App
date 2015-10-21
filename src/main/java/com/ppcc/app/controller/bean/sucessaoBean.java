@@ -8,31 +8,26 @@ package com.ppcc.app.controller.bean;
 import com.ppcc.app.model.entity.PessoaJuridica;
 import com.ppcc.app.model.entity.PessoaJuridicaSucessao;
 import com.ppcc.app.model.entity.PessoaJuridicaSucessaoHistorico;
-import com.ppcc.app.model.entity.Usuario;
 import com.ppcc.app.model.jpa.controller.PessoaJuridicaJpaController;
 import com.ppcc.app.model.jpa.controller.PessoaJuridicaSucessaoHistoricoJpaController;
 import com.ppcc.app.model.jpa.controller.PessoaJuridicaSucessaoJpaController;
 import com.ppcc.app.model.jpa.controller.UsuarioJpaController;
 import com.ppcc.app.model.jpa.controller.UtilJpaController;
+import com.ppcc.app.util.Cookie;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import com.ppcc.app.util.Cookie;
 import com.ppcc.app.util.GeradorLog;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author Pedro
  */
+@Named
 @ViewScoped
-@ManagedBean(name = "sucessaoBean")
 public class sucessaoBean implements Serializable {
 
     private String succeed;

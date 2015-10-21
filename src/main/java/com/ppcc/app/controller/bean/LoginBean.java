@@ -8,11 +8,7 @@ package com.ppcc.app.controller.bean;
 import com.ppcc.app.model.entity.RecuperarSenha;
 import com.ppcc.app.model.entity.Usuario;
 import java.io.IOException;
-import java.io.Serializable;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.mail.EmailException;
@@ -28,14 +24,14 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.ppcc.app.util.Base64Crypt;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author PRCC
  */
-@ManagedBean(name = "loginBean")
+@Named
 @ViewScoped
 public class LoginBean implements Serializable {
 

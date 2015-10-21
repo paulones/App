@@ -1,0 +1,190 @@
+<ui:composition template="../template/template.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="title">Pessoa Jurídica - Sucessão Empresarial</ui:define>
+    <ui:define name="metadata-components">
+        <f:event type="preRenderComponent" listener="#{sucessaoBean.init()}"/>
+    </ui:define>
+    <ui:define name="page-styles">
+        <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+        <link rel="stylesheet" type="text/css" href="../assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+        <!-- END PAGE LEVEL PLUGIN STYLES -->
+        <!-- BEGIN PAGE STYLES -->
+        <style>
+        </style>
+        <!-- END PAGE STYLES -->
+    </ui:define>
+    <ui:define name="content">
+        <!-- BEGIN PAGE HEADER-->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN PAGE TITLE e BREADCRUMB-->
+                <h3 class="page-title">
+                    Pessoa Jurídica <small>Sucessão</small>
+                </h3>
+                <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="../home.xhtml">Home</a>
+                        <i class="fa fa-angle-right"/>
+                    </li>
+                    <li>
+                        <i class="fa fa-institution"></i>
+                        <a href="#">Pessoa Jurídica</a>
+                        <i class="fa fa-angle-right"></i>
+                    </li>
+                    <li>
+                        <i class="fa fa-exchange"></i>
+                        <a href="sucessao.xhtml">Sucessão</a>
+                    </li>
+                </ul>
+                <!-- END PAGE TITLE e BREADCRUMB-->
+            </div>
+        </div>
+        <!-- END PAGE HEADER-->
+        <!-- BEGIN PAGE CONTENT-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue-chambray">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-exchange"></i>
+                            Sucessão de Empresas
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <!-- BEGIN FORM-->
+                        <h:form prependId="false" id="form" class="form-horizontal">
+                            <h:panelGroup id="alerts">
+                                <div class="alert alert-danger form-error display-hide">
+                                    <button class="close" data-close="alert"></button>
+                                    Há alguns erros no formulário. Digite os dados corretamente.
+                                </div>
+                                <h:panelGroup layout="block" class="alert alert-danger" rendered="#{sucessaoBean.succeed eq 'fail'}">
+                                    <button class="close" data-close="alert"></button>
+                                    <h:messages layout="table" class="p-info"/> 
+                                </h:panelGroup>
+                                <h:panelGroup layout="block" class="alert alert-info" rendered="#{sucessaoBean.succeed eq 'info'}">
+                                    <button class="close" data-close="alert"></button>
+                                    <h:messages layout="table" class="p-info"/> 
+                                </h:panelGroup>
+                                <h:panelGroup layout="block" class="alert alert-warning" rendered="#{sucessaoBean.succeed eq 'warning'}">
+                                    <button class="close" data-close="alert"></button>
+                                    <h:messages layout="table" class="p-info"/> 
+                                </h:panelGroup>
+                                <h:panelGroup layout="block" class="alert alert-success" rendered="#{sucessaoBean.succeed eq 'success'}">
+                                    <button class="close" data-close="alert"></button>
+                                    <h:messages layout="table" class="p-info"/>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <h3 class="form-section">Empresa Sucedida</h3>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">CNPJ</label>
+                                        <div class="col-md-10">
+                                            <h:inputText class="select2_category form-control cnpjVinculate" id="sucedida" value="#{sucessaoBean.sucedida}">
+                                                <f:ajax event="change" execute="sucedida sucessora" listener="#{sucessaoBean.checkSucessoes}" render="alerts"/>
+                                            </h:inputText>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <a href="javascript:;" class="btn blue-chambray pj-info" id="view-sucedida">
+                                        <h:inputText class="object-id display-hide"/>
+                                        <i class="fa fa-plus-circle"></i> Visualizar Sucedida
+                                    </a>
+                                    <a href="javascript:;" class="btn blue-chambray pj-new">
+                                            Novo cadastro <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!--/row-->
+                            <h3 class="form-section">Empresa Sucessora</h3>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">CNPJ</label>
+                                        <div class="col-md-10">
+                                            <h:inputText class="select2_category form-control cnpjVinculate" id="sucessora" value="#{sucessaoBean.sucessora}">
+                                                <f:ajax event="change" execute="sucessora sucedida" listener="#{sucessaoBean.checkSucessoes}" render="alerts"/>
+                                            </h:inputText>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <a href="javascript:;" class="btn blue-chambray pj-info" id="view-sucessora">
+                                        <h:inputText class="object-id display-hide"/>
+                                        <i class="fa fa-plus-circle"></i> Visualizar Sucessora
+                                    </a>
+                                    <a href="javascript:;" class="btn blue-chambray pj-new">
+                                            Novo cadastro <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <br/>
+                            <h3 class="form-section">Dados da Sucessão</h3>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Data da Sucessão</label>
+                                        <div class="col-md-6">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <h:inputText class="form-control date" id="data" p:placeholder="dd/mm/aaaa" value="#{sucessaoBean.dataDeSucessao}"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class="form-actions right">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button class="btn blue-chambray submit-sucessao">
+                                                <i class="fa fa-exchange"></i> Suceder
+                                            </button>
+                                            <h:commandLink styleClass="suceder" action="#{sucessaoBean.suceder}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                        <!-- END FORM-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    </ui:define>
+    <ui:define name="page-scripts">
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <!-- IMPORTANT! fullcalendar depends on jquery-ui-1.10.3.custom.min.js for drag e drop support -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="../assets/global/plugins/jquery-validation/js/jquery.validate.js"></script>
+        <script type="text/javascript" src="../assets/global/plugins/jquery-validation/js/localization/messages_pt_BR.js"></script>
+        <script type="text/javascript" src="../assets/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="../assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+        <!-- END PAGE LEVEL PLUGINS -->
+        <!-- BEGIN PAGE LEVEL SCRIPTS -->
+        <script src="../assets/admin/pages/scripts/pj-sucessao.js" type="text/javascript"></script>
+        <!-- END PAGE LEVEL SCRIPTS -->
+        <script>
+            jQuery(document).ready(function() {
+                Metronic.init(); // init metronic core componets
+                Layout.init(); // init layout
+                PJSuc.init();
+            });
+        </script>
+    </ui:define>
+</ui:composition>
